@@ -1,0 +1,116 @@
+body{
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 12px;
+	padding: 0;
+	margin: 0;
+	overflow: scroll;
+}
+canvas#graph{
+}
+
+h1#label_table
+{
+	background: transparent url('../img/global/header.png') top left repeat-y;
+	margin: 0;
+	color: white;
+	padding: 5px;
+	border-bottom: 1px ridge white;
+	font-size: 12px;
+}
+/**MENU**/
+ul#menu_bar{
+	list-style-type: none;
+	height: 19px;
+	margin: 0;
+	padding: 4px 0 0;
+	background-color: menu;
+	border-top: 1px solid white;
+	border-bottom: 1px ridge rgb(128,128,128);
+}
+ul#menu_bar li.menu_toggable{
+	float: left;
+	
+}
+ul#menu_bar li.menu_toggable a.menu_label {
+	height: 15px;
+	margin: 0;
+	padding: 3px 10px;
+	border: 2px solid menu;
+	color: black;
+	text-decoration: none;
+}
+ul#menu_bar li.menu_toggable a.menu_label:hover {
+	border-top: 2px solid white;
+	border-left: 2px solid white;
+	border-bottom: 2px solid rgb(128,128,128);
+	border-right: 2px solid rgb(128,128,128);
+}
+ul#menu_bar li.menu_toggable ul.menu_item{
+	display: none;
+	z-index: 1;
+	float: none;
+	position: absolute;
+	list-style-type: none;
+	margin: 5px 0 0;
+	padding: 3px 0;
+	background-color: menu;
+	border-top: 2px solid white;
+	border-left: 2px solid white;
+	border-bottom: 2px solid rgb(128,128,128);
+	border-right: 2px solid rgb(128,128,128);
+}
+ul#menu_bar li.menu_toggable ul.menu_item li a{
+	display: block;
+	height: 17px;
+	padding: 3px 10px;
+	color: black;
+	text-decoration: none;
+}
+ul#menu_bar li.menu_toggable ul.menu_item li a:hover{
+	color: white;
+	background-color: rgb(10,36,106);
+}
+ul#menu_bar ul li.btn {
+	display: none;
+}
+
+
+/**ICONS**/
+
+div.table_container:hover{
+	cursor: move;
+}
+div.table_container{
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	position: absolute;
+	top: 100px;
+	left: 50px;
+	padding: 0;
+	margin: 0;
+	display: block;
+}
+div.table_container h3{
+	-moz-border-radius-topleft: inherit;
+	-moz-border-radius-topright: inherit;
+	background-color: rgb(220,220,220);
+	border-bottom: 1px solid black;
+	text-align: center;
+	padding: 0 15px;
+	margin: 0;
+}
+div.table_container ul{
+	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+	background-color: rgb(240,240,240);
+	list-style-type: none;
+	padding: 0 10px;
+	margin: 0;
+}
+
+ul li.primary_key{
+	font-weight: bold;
+}
+ul li.foreign_key{
+	font-style: italic;
+}

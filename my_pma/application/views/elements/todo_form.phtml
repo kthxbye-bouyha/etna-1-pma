@@ -1,0 +1,8 @@
+<?php echo $form->create(null, array('method' => 'POST'), 'todo'); ?>
+	<?php echo $form->hidden('id'); ?>
+    <p>Titre : <?php echo $form->input('titre'); ?></p>
+    <p>Rappel : <?php echo $form->input('rappel'); ?></p>
+    <p>Avancement : <?php echo $form->input('avancement'); ?></p>
+    <p>Created : <?php echo $form->input('created'); ?></p>
+    <p>Modified : <?php echo $form->input('modified'); ?></p>
+<?php echo $form->end('Confirmer'); ?>
