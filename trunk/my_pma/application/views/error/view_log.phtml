@@ -1,0 +1,12 @@
+<div id="breadcrumb">
+	<h2>Erreur &gt; </h2>
+	<h3>Viewlog</h3>
+</div>
+<table>
+	<caption>Logs</caption>
+    <?php foreach ($log_list as $log_item): ?>
+	<tr>
+        <td><?php echo str_replace("\n", '', $log_item); ?></td>
+    </tr>
+    <?php endforeach; ?>
+</table>

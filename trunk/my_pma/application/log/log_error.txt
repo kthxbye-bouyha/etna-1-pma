@@ -1,0 +1,90 @@
+[date: Mon-01-2009 22:32][request: [GET] /framework/erreur1/bidule]
+[get: Array
+(
+)
+]
+[post: Array
+(
+)
+]
+
+[date: Mon-01-2009 22:33][request: [GET] /framework/erreur2/truc?param1=value1&param2=value2]
+[get: Array
+(
+    [param1] => value1
+    [param2] => value2
+)
+]
+[post: Array
+(
+)
+]
+
+[date: Mon-01-2009 22:33][request: [GET] /framework/erreur1/bidule]
+[get: Array
+(
+)
+]
+[post: Array
+(
+)
+]
+
+[date: Mon-01-2009 19:24][request: [POST] /my_pma/position/save]
+[get: Array
+(
+)
+]
+[post: Array
+(
+    [db_name] => Modelisation de la bdd mytodo
+    [table_todo] => Array
+        (
+            [x] => 119
+            [y] => 119
+        )
+
+    [table_todo_priority] => Array
+        (
+            [x] => 572
+            [y] => 180
+        )
+
+    [table_todo_reference] => Array
+        (
+            [x] => 294
+            [y] => 328
+        )
+
+)
+]
+
+[date: Mon-01-2009 19:25][request: [POST] /my_pma/position/save]
+[get: Array
+(
+)
+]
+[post: Array
+(
+    [db_name] => mytodo
+    [table_todo] => Array
+        (
+            [x] => 119
+            [y] => 119
+        )
+
+    [table_todo_priority] => Array
+        (
+            [x] => 572
+            [y] => 180
+        )
+
+    [table_todo_reference] => Array
+        (
+            [x] => 294
+            [y] => 328
+        )
+
+)
+]
+

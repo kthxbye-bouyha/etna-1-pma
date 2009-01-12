@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title><?php echo $page_title; ?></title>
+		<script type="text/javascript">
+			var relative_root = "<?php echo $relative_root ?>";
+		</script>
+		<!-- IMPORT DES CSS COMMUNS -->
+		<?php echo $html->css('common'); ?>
+		
+		<!-- IMPORT DES JS COMMUNS -->
+		<?php echo $html->js('lib/Ajax'); ?>
+		<?php echo $html->js('lib/Effect'); ?>
+		<?php echo $html->js('lib/Element'); ?>
+		<?php echo $html->js('lib/Event'); ?>
+        <?php echo $html->js('dbMenu'); ?>
+	</head>
+	<body onload="DocumentLoad(event);">
+		<div id="main_menu">
+		
+        <form onchange="menuHandler(event);">
+        	<p><label>BDD :</label> 
+            	<select id ="db_selector">
+        		<?php
+        		foreach ($databases as $database)
+        		{
+        		    $selected = ($db_selected == $database['Database'] ? 'selected="' . $database['Database'] . '"' : null);
+        			echo '<option 
+        					value="' . $database['Database'] . '"' . 
+        					$selected . '>' .
+        			            $database['Database'] .
+        			     	'</option>';
+        		}
+        		?>
+            	</select>
+        	</p>
+        </form>
+        </div>
+        <div id="content">
+		<?php echo $action_content; ?>
+		</div>
+	</body>
+</html>

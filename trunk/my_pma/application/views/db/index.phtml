@@ -1,0 +1,28 @@
+<!-- BLOCK MENU -->
+<?php echo $html->render_element('menu_db'); ?>
+
+<!-- BLOCK MANIPULATION -->
+<div class="block_menu_tab" id="block_manipulation">
+	<table>
+		<caption>Table dans la base de donnée <?php echo $db_name ?></caption>
+		<thead>
+			<tr>
+				<th>Table</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+    	<?php foreach ($db_tables as $table_name => $table_struct): ?>
+    		<tr>
+    			<td><?php echo $table_name ?></td>
+    			<td>Afficher - Structure - Rechercher - Inserer - Vider</td>
+    		</tr>
+    	<?php endforeach; ?>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="2">Ajouter</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
