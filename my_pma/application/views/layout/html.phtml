@@ -36,12 +36,44 @@
             	</p>
             </form>
         	<!-- BLOCK MENU -->
-        	<?php echo $html->render_element('menu_db'); ?>
-        	<?php echo $html->render_element('menu_table'); ?>
+            <?php /*if (isset($db_selected)): ?>
+            <ul class="menu_tab">
+            	<li><?php echo $db_selected; ?></li>
+            	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'list'), 'List'); ?></li>
+            	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'visualization'), 'visualisation'); ?></li>
+            	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'export'), 'exporter'); ?></li>
+            	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'import'), 'importer'); ?></li>
+            </ul>
+            <?php endif;*/ ?>
+                        		
+            <?php
+            if (isset($tables))
+            {
+                echo '<ul class="menu_tab">' . 
+                		'<li>' . $html->link(array('controller' => 'db', 'action' => 'list', 'params' => array('db_selected' => $db_selected)), $db_selected). '</li>' .
+                        '<ul>';
+                foreach ($tables as $table_name => $struct)
+                {
+                    echo '<li>' . $html->link(array('controller' => 'table', 'action' => 'struct', 'params' => array('table_selected' => $table_name)), $table_name) . '</li>';
+                }
+                echo 	'</ul>'.
+                	 '</ul>';
+               
+            }
+            ?>
         </div>
         <div id="content">
-        	
-        	<?php echo $action_content; ?>
+        	<?php 
+            if (isset($table_selected) && $table_name == $table_selected)
+            {
+                echo '<ul>' .
+                        '<li>' . $html->link(array('controller' => ''), "") . '</li>' .
+                        '<li>' . $html->link(array('controller' => 'table', 'action' => 'list', 'params' => array('table_selected' => $table_selected)), 'Afficher') . '</li>' .
+                        '<li>' . $html->link(array('controller' => 'row', 'action' => 'create', 'params' => array('table_selected' => $table_selected)), 'Inserer') . '</li>' .
+                     '</ul>';
+            }
+        	echo $action_content;
+        	?>
 		</div>
 	</body>
 </html>

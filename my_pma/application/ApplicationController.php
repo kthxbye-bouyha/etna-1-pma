@@ -83,7 +83,10 @@ abstract class ApplicationController extends Controller
             $this->layoutVars->set('db_selected', $this->dbSelected);
         }
         if ($this->tableSelected != "")
+        {
+            $this->layoutVars->set('table_selected', $this->tableSelected);
             $this->layoutVars->set('tables', $db->getTables());
+        }
     }
     
 }
