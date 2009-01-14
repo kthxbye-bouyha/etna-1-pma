@@ -1,0 +1,9 @@
+<!-- MENU TABLE -->
+<?php if (isset($tables)): ?>
+<ul class="menu_tab">
+	<li><?php echo $table_selected; ?></li>
+	<?php foreach ($tables as $table): ?>
+		<?php var_dump($table); ?>
+	<?php endforeach; ?>
+</ul>
+<?php endif; ?>

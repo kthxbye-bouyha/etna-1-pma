@@ -64,10 +64,10 @@ class Database extends DB_Connexion
     
     private function getDataBaseStruct()
     {
+        
         $stmt = self::$con->prepare('SHOW TABLES');
         $stmt->execute();
         $data_tables = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
         $db_tables = array();
         foreach($data_tables as $table_name)
         {

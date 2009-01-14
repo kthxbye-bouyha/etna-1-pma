@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL);
 require_once 'utils.php';
 //config
 $config = Config::getInstance();
@@ -17,15 +16,8 @@ $vars = array('db' => array('driver' => 'mysql',
 
 $config->set('db', $vars['db']);
 $config->set('app', $vars['app']);
-//def connexion
 
-/*
-$db = new Database($config->get('db.user'),
-                   $config->get('db.pwd'),
-                   $config->get('db.host'),
-                   $config->get('db.db_name'));
-*/
-                   
+
 //call front controller    
 try {
     $front_controller = FrontController::getInstance();

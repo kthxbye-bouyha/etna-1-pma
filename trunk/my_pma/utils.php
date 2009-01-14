@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
 set_include_path('./lib;'.
 				 './lib/Controller;' .
 				 './lib/View;' .
