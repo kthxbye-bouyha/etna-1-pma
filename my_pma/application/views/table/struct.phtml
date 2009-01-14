@@ -1,0 +1,30 @@
+<table>
+	<caption><?php echo $table_name; ?></caption>
+	<thead>
+		<tr>
+			<th>Champ</th>
+			<th>Type</th>
+			<th>Null</th>
+			<th>Key</th>
+			<th>Default</th>
+			<th>Extra</th>
+		</tr>
+	</thead>
+	<tbody>
+    <?php 
+    foreach ($struct_table as $table):
+    	echo '<tr>' .
+        	    '<td>' . $table['Field'] . '</td>' .
+        	    '<td>' . $table['Type'] . '</td>' .
+        	    '<td>' . $table['Null'] . '</td>' .
+        	    '<td>' . $table['Key'] . '</td>' .
+        	    '<td>' . $table['Default'] . '</td>' .
+        	    '<td>' . $table['Extra'] . '</td>' .
+    	     '</tr>';
+    endforeach;
+    ?>
+    </tbody>
+    <tfoot>
+    	<tr><td colspan="6">Ajouter</td></tr>
+    </tfoot>
+</table>

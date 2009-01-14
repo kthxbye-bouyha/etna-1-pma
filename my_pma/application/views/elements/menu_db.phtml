@@ -1,5 +1,10 @@
-<!-- MENU ONGLET -->
+<!-- MENU TABLE -->
+<?php if (isset($databases)): ?>
 <ul class="menu_tab">
-	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'index'), 'Structure'); ?></li>
-	<li><?php echo $html->link(array('controller' => 'visualization', 'action' => 'index'), 'Visualisation'); ?></li>
+	<li><?php echo $db_selected; ?></li>
+	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'list'), 'structure'); ?></li>
+	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'visualization'), 'visualisation'); ?></li>
+	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'export'), 'exporter'); ?></li>
+	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'import'), 'importer'); ?></li>
 </ul>
+<?php endif; ?>

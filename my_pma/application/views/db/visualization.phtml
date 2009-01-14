@@ -1,0 +1,42 @@
+<!-- IMPORT DES JS -->
+<?php echo $html->js('UITable'); ?>
+<?php echo $html->js('Canvas'); ?>
+<?php echo $html->js('Table'); ?>
+<?php echo $html->js('TableManager'); ?>
+
+<h2>Modelisation de la bdd <span id="db_name"><?php echo $db_name ?></span></h2>
+<p><a href="#" class="btn" id="saveSchema">Sauvegarder</a></p>
+<canvas id="graph" height="0" width="0"></canvas>
+<?php foreach ($db_tables as $table_name => $table_fields): ?>
+<div 
+	id="table_<?php echo $table_name ?>"  
+	class="table_container"
+	<?php if (isset($tables_pos['table_'.$table_name])): ?>
+	style="left: <?php echo $tables_pos['table_'.$table_name]['x'] ?>px;
+		   top: <?php echo $tables_pos['table_'.$table_name]['y'] ?>px;"
+	<?php endif; ?>
+	>
+	<h3><?php echo $table_name ?></h3>
+	<ul>
+		<?php 
+		foreach ($table_fields as $field)
+		{
+		    $options = array();
+		    if($field['Key'] == 'PRI')
+		        $options = array('class' => 'primary_key'); 
+		    else if (is_array($field['Key']))
+		        $options = array('class' => 'foreign_key',
+		        				 'id' => 'fk_|' .  
+		                            $field['Key']['REFERENCED_TABLE_NAME'] . '|' .
+		                            $field['Key']['REFERENCED_COLUMN_NAME']
+		                            );
+		    $output = '<li';
+		    foreach ($options as $opt => $value)
+		        $output .= ' ' . $opt . '="' . $value . '"';
+		    $output .= '>' . $field['Field'] . '</li>';
+		    echo $output;
+		}
+		?>
+	</ul>
+</div>
+<?php endforeach; ?>

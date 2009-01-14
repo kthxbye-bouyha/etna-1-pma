@@ -18,27 +18,30 @@
 	</head>
 	<body onload="DocumentLoad(event);">
 		<div id="main_menu">
-		
-        <form onchange="menuHandler(event);">
-        	<p><label>BDD :</label> 
-            	<select id ="db_selector">
-        		<?php
-        		foreach ($databases as $database)
-        		{
-        		    $selected = ($db_selected == $database['Database'] ? 'selected="' . $database['Database'] . '"' : null);
-        			echo '<option 
-        					value="' . $database['Database'] . '"' . 
-        					$selected . '>' .
-        			            $database['Database'] .
-        			     	'</option>';
-        		}
-        		?>
-            	</select>
-        	</p>
-        </form>
+    		<form onchange="menuHandler(event);">
+            	<p><label>BDD :</label> 
+                	<select id ="db_selector">
+            		<?php
+            		foreach ($databases as $database)
+            		{
+            		    $selected = ($db_selected == $database['Database'] ? 'selected="' . $database['Database'] . '"' : null);
+            			echo '<option 
+            					value="' . $database['Database'] . '"' . 
+            					$selected . '>' .
+            			            $database['Database'] .
+            			     	'</option>';
+            		}
+            		?>
+                	</select>
+            	</p>
+            </form>
+        	<!-- BLOCK MENU -->
+        	<?php echo $html->render_element('menu_db'); ?>
+        	<?php echo $html->render_element('menu_table'); ?>
         </div>
         <div id="content">
-		<?php echo $action_content; ?>
+        	
+        	<?php echo $action_content; ?>
 		</div>
 	</body>
 </html>

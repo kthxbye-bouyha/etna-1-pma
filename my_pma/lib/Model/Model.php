@@ -28,9 +28,12 @@ abstract class Model extends Database {
      */
     private $name;
     
-    public function __construct()
+    public function __construct($table_name = null)
     {
-        $this->setName(get_class($this));
+        if ($table_name !== null)
+            $this->setName($table_name);
+        else
+            $this->setName(get_class($this));
         $this->setFields();
     }
     
@@ -78,7 +81,7 @@ abstract class Model extends Database {
      */
     public function getFields()
     {
-        return $this->Fields;
+        return $this->fields;
     }
     
     /**

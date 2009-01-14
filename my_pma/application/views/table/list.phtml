@@ -1,0 +1,26 @@
+<table>
+	<caption>Affichage de la table <?php echo $table_name; ?></caption>
+	<thead>
+		<tr>
+		<?php
+		foreach ($struct_table as $field)
+		    echo '<td>' . $field['Field'] . '</td>';
+		?>
+			<td colspan="2">Action</td>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($content_table as $table): ?>
+		<tr>
+		    <?php foreach($table as $content): ?>
+    	    <td><?php echo $content; ?></td>
+    	    <?php endforeach;?>
+    	    <td><?php echo  $html->link(array('controller' => 'row', 'action' => 'update', 'params' => array('id' => $table['id'])), 'Editer'); ?></td>
+    	    <td><?php echo $html->link(array('controller' => 'row', 'action' => 'delete', 'params' => array('id' => $table['id'])), 'Supprimer'); ?></td>
+	       </tr>
+		<?php endforeach; ?>
+	</tbody>
+	<tfoot>
+		<tr><td colspan="<?php echo count($struct_table) ?>">Inserer</td></tr>
+	</tfoot>
+</table>
