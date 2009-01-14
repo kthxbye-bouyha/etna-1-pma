@@ -1,6 +1,6 @@
 function menuHandler(event)
 {
-  url = "/" + relative_root + "/db/struct?db_selected=";
+  url = "/" + relative_root + "/db/list?db_selected=";
   
   select = $('#db_selector');
   for (i = 0; i < select.options.length; i++)

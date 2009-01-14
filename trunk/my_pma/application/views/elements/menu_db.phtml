@@ -1,5 +1,5 @@
 <!-- MENU TABLE -->
-<?php if (isset($databases)): ?>
+<?php if (isset($db_selected)): ?>
 <ul class="menu_tab">
 	<li><?php echo $db_selected; ?></li>
 	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'list'), 'structure'); ?></li>
