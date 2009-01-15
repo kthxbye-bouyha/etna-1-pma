@@ -64,7 +64,7 @@ class FormHelper extends Helper
     
     public function end($name = null, $options = array())
     {
-        return ('<p><input type="Submit" value="' . ($name != null ? $name : "Submit") . '"/></p></form>');
+        return ('<p class="submit_btn"><input type="Submit" value="' . ($name != null ? $name : "Submit") . '"/></p></form>');
     }
     
     public function enum()
