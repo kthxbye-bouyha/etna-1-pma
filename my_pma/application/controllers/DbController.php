@@ -4,9 +4,9 @@ class DbController extends ApplicationController
     
     protected function init_controller()
     {
-        $db = new Database();
-        $this->viewVars->set('db_name', $db->getDbName());
-        $this->viewVars->set('db_tables', $db->getTables());
+        $this->model = new Database();
+        $this->viewVars->set('db_name', $this->model->getDbName());
+        $this->viewVars->set('db_tables', $this->model->getTables());
     }
     public function IndexAction()
     {
@@ -20,7 +20,7 @@ class DbController extends ApplicationController
     
     public function ExportAction()
     {
-    
+        $this->model->dumpDatabase();
     }
     
     public function ImportAction()
@@ -30,8 +30,7 @@ class DbController extends ApplicationController
     
     public function VisualizationAction()
     {
-        $db = new Database();
-        $this->viewVars->set('tables_pos', $db->GetTablePosition());
+        $this->viewVars->set('tables_pos', $this->model->GetTablePosition());
     }
     
     

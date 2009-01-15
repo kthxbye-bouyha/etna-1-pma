@@ -103,6 +103,7 @@ abstract class Controller
         $method_name = $this->actionName . 'Action';
         $this->{$method_name}();
         
+        $this->before_render();
         //send data to view
         $this->data->set('helpers', $this->helpers);
         $this->data->set('layout_vars', $this->layoutVars->getAll());
@@ -113,13 +114,20 @@ abstract class Controller
         $this->view->display();
     }
     
-    protected function redirect($url = array())
+    /**
+     * 
+     * @param $url array('controller' => '', 'action' => '')
+     * @param $confirmation array('status' => true||false, 'message' => '')
+     * @return void
+     */
+    protected function redirect($url = array(), $confirmation)
     {
         header('Location: /' . Config::getInstance()->get('app.relative_root') . '/' . $url['controller'] . '/' . $url['action']);
     }
     
-    abstract protected function init_app_controller();
-    abstract protected function init_controller();
+    protected function init_app_controller(){}
+    protected function init_controller(){}
+    protected function before_render(){}
 	
 }
 ?>
