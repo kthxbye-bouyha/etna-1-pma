@@ -1,5 +1,7 @@
 @CHARSET "UTF-8";
 body{
+	font-size: 0.8em;
+	color: rgb(69,128,175);
 }
 h1{
 	text-align: center;
@@ -12,11 +14,30 @@ h3{
 }
 h4{
 }
+
+
+a, a:link, :visited{
+	color: blue;
+}
+a:active{
+	color: purple;
+}
+a:hover{
+	text-decoration: none;		
+}
+
+hr.clear{
+	border: none;
+	margin: 0;
+	padding: 0;
+	clear: both;
+}
+
 body, h1, h2, h3, h4{
 	font-family: Verdana, Arial, sans-serif;
 	margin: 0;	padding: 0;
-	font-size: 0.9em;
 }
+
 div.bordered{
 	margin: 15px;
 	border: 0px solid #5B91BF;
@@ -26,17 +47,26 @@ div.bordered{
 	-moz-border-radius-bottomright:10px;
 	-moz-border-radius-bottomleft:10px;
 }
+
 div#main_menu{
-	width: 20%;
+	width: 220px;
 	float: left;
 	list-style-type: none;
 }
+div#content{
+	float: left;
+	max-width: 65%;
+}
+
+
 div#main_menu h3{
 	color: #5B91BF;
 	text-align: center;
 	padding: 3px 0 0 0;
 	margin: 0;
 }
+
+
 ul.menu_tab{
 	padding : 0 0 0 20px;;
 	margin: 0;
@@ -49,13 +79,6 @@ ul.menu_tab li{
 	display: block;
 	text-indent: 20px;
 }
-ul.menu_tab li a{
-	color: blue;
-}
-ul.menu_tab li a:hover{
-	text-decoration: none;		
-}
-
 ul#databases_menu li{
 	background: transparent url('../img/icons/database.png') 2px 3px no-repeat;
 }
@@ -70,50 +93,122 @@ ul#tables_menu li{
 div#breadcrumb{
 }
 
+
 h4.success{
 	background-color: green;
 }
 h4.error{
 	background-color: red;
 }
-div#content{
-	width: 70%;
-	float: left;
-	padding: 20px;
-}
+
 
 table{
-	
+	border-collapse: collapse;
+	margin: 20px;
 }
 caption{
 	text-align: left;
-	padding: 10px;
+	padding: 5px;
 }
 thead{
-	
+	text-align: center;
+	color: #5B91BF;
+	font-weight: bold;
+}
+thead tr, thead tr th, thead tr td{
+	border: 1px solid white;
+	background-color: #5B91BF;
+	color: white;
+	font-weight: bold;
+	padding: 2px 5px;
+	font-family: Arial;
+	font-size: 0.9em;
+}
+tbody tr:hover, tbody tr:hover td{
+	background-color: white;
+}
+tbody tr, tbody tr td{
+	background-color: rgb(224,235,243);
+	border: 1px solid white;
+	padding: 2px 5px;
+	font-size: 0.9em;
 }
 
 tfoot tr td{
-	padding: 10px;
+	padding: 5px;
 	text-align: left;
 }
 tbody{
+	background: white;
+}
+div#content form fieldset{
+	border: none;
+}
+div#content form fieldset legend{
 	
 }
-
 div#content form label{
 	display: block;
 	width: 200px;
 	text-align: right;
 	float: left;
 	margin-right: 3px;
-	background : 
+	color: rgb(69,128,175);
+	line-height: 1.5em;
 }
 
 div#content form p{
 	padding: 5px;
 	margin: 0px;
 }
+div#content form p input,
+div#content form p textarea,
+div#content form p select{
+	border: 1px solid #5B91BF;
+}
+div#content form p input:focus,
+div#content form p textarea:focus,
+div#content form p select:focus{
+	background-color: rgb(224,235,243);
+}
+
+ul#menu_context_db{
+	list-style-type: none;
+	list-style-position: inline;
+	margin: 0 0 20px 0;
+	padding: 0;
+}
+ul#menu_context_db li.label{
+	background-color: #5B91BF;
+	font-weight: bold;
+	color: white;
+	
+}
+ul#menu_context_db li{
+	display: block;
+	float: left;
+	padding: 1px 10px;
+	border-right: 1px solid #5B91BF;
+	border-bottom: 1px solid #5B91BF;
+	border-left:  1px solid #5B91BF;
+}
+
+p#query_string{
+	background-color: rgb(241, 247, 250);
+	border: 1px dashed #5B91BF;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 div.table_container:hover{

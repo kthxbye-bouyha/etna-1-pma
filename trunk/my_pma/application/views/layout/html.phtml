@@ -61,16 +61,50 @@
         </div>
         <div id="content" class="bordered">
         	<?php 
-            if (isset($table_selected) && $table_name == $table_selected)
+            if (isset($db_selected))
             {
-                echo '<ul>' .
-                        '<li>' . $html->link(array('controller' => ''), "") . '</li>' .
-                        '<li>' . $html->link(array('controller' => 'table', 'action' => 'list', 'params' => array('table_selected' => $table_selected)), 'Afficher') . '</li>' .
-                        '<li>' . $html->link(array('controller' => 'row', 'action' => 'create', 'params' => array('table_selected' => $table_selected)), 'Inserer') . '</li>' .
-                     '</ul>';
+                echo '<ul id="menu_context_db">' .
+                        '<li class="label">db: ' . $db_selected . '</li>' .
+                        '<li>' . $html->link(array('controller' => 'db',
+                        						   'action' => 'list',
+                                                   'params' => array('db_selected' => $db_selected)),
+                							'List') . 
+                        '<li>' . $html->link(array('controller' => 'db',
+                        						   'action' => 'sql',
+                                                   'params' => array('db_selected' => $db_selected)),
+                							'SQL') . 
+                		'</li>' .
+                        '<li>' . $html->link(array('controller' => 'db',
+                        						   'action' => 'import',
+                                                   'params' => array('db_selected' => $db_selected)),
+                							'Importer') . 
+                		'</li>' .
+                        '<li>' . $html->link(array('controller' => 'db',
+                        						   'action' => 'export',
+                                                   'params' => array('db_selected' => $db_selected)),
+                							'Exporter') .
+                		'</li>' .
+                        '<li>' . $html->link(array('controller' => 'db',
+                        						   'action' => 'operation',
+                                                   'params' => array('db_selected' => $db_selected)),
+                							'Operation') .
+                		'</li>' .
+                        '<li>' . $html->link(array('controller' => 'db',
+                        						   'action' => 'delete',
+                                                   'params' => array('db_selected' => $db_selected)),
+                							'Delete') .
+                		'</li>' .
+                     '</ul>' .
+                     '<hr class="clear"/>';
             }
-        	echo $action_content;
-        	?>
+            ?>
+            <?php if (isset($queryString)): ?>
+            	<p id="query_string">
+            		<strong>SQL :</strong><br />
+            		<?php echo $queryString; ?>
+            	</p>
+            <?php endif; ?>
+            <?php echo $action_content; ?>
 		</div>
 	</body>
 </html>

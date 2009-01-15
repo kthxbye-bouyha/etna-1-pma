@@ -3,7 +3,7 @@
 	<thead>
 		<tr>
 			<th>Table</th>
-			<th colspan="6">Actions</th>
+			<th colspan="7">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
@@ -19,6 +19,7 @@
 			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'struct', 'params' => array('table_selected' => $table_name)), 'Structure'); ?></td>
 			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'search', 'params' => array('table_selected' => $table_name)), 'Rechercher'); ?></td>
 			<td><?php echo $html->link(array('controller' => 'row', 'action' => 'create', 'params' => array('table_selected' => $table_name)), 'Inserer'); ?></td>
+			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'export', 'params' => array('table_selected' => $table_name)), 'Exporter'); ?></td>
 			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'truncate', 'params' => array('table_selected' => $table_name)), 'Vider'); ?></td>
 			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'drop', 'params' => array('table_selected' => $table_name)), 'Supprimer'); ?></td>
 		</tr>

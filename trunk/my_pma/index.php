@@ -7,6 +7,7 @@ $vars = array('db' => array('driver' => 'mysql',
 							'user' => 'root',
 							'pwd' => '',
 							'db_name' => 'mytodo'),
+            //nom du dossier ds htdocs/ ou www/
              'app' => array('absolute_root' => $_SERVER['DOCUMENT_ROOT']."my_pma",
              				'relative_root' => "my_pma",
                             'fc' => array('default_controller' => array('value' => 'Index'),

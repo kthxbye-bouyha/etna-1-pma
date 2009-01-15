@@ -8,10 +8,11 @@
 			<th>Key</th>
 			<th>Default</th>
 			<th>Extra</th>
+			<th colspan="6">Action</th>
 		</tr>
 	</thead>
     <tfoot>
-    	<tr><td colspan="6">Ajouter</td></tr>
+    	<tr><td colspan="12">Ajouter</td></tr>
     </tfoot>
 	<tbody>
     <?php 
@@ -23,6 +24,42 @@
         	    '<td>' . $table['Key'] . '</td>' .
         	    '<td>' . $table['Default'] . '</td>' .
         	    '<td>' . $table['Extra'] . '</td>' .
+        	    '<td>' . 
+    	            $html->link(array('controller' => 'table',
+    	                        	 'action' => 'distinct',
+    	                        	 'params' => array('field_selected' => $table['Field'])),
+    	                  	   'Distinct') . 
+    	        '</td>' .
+        	    '<td>' . 
+    	            $html->link(array('controller' => 'table',
+    	                        	  'action' => 'alterfield',
+    	                        	  'params' => array('field_selected' => $table['Field'])),
+    	                  	   'Edit') . 
+    	        '</td>' .
+        	    '<td>' . 
+    	            $html->link(array('controller' => 'table',
+    	                        	  'action' => 'deletefield',
+    	                        	  'params' => array('field_selected' => $table['Field'])),
+    	                  	   'Supprimer') . 
+    	        '</td>' .
+        	    '<td>' . 
+    	            $html->link(array('controller' => 'table',
+    	                        	  'action' => 'primaryfield',
+    	                        	  'params' => array('field_selected' => $table['Field'])),
+    	                  	   'Primaire') . 
+    	        '</td>' .
+        	    '<td>' . 
+    	            $html->link(array('controller' => 'table',
+    	                        	  'action' => 'unique',
+    	                        	  'params' => array('field_selected' => $table['Field'])),
+    	                  	   'Unique') . 
+    	        '</td>' .
+        	    '<td>' . 
+    	            $html->link(array('controller' => 'table',
+    	                        	  'action' => 'index',
+    	                        	  'params' => array('field_selected' => $table['Field'])),
+    	                  	  'Index') . 
+    	        '</td>' .
     	     '</tr>';
     endforeach;
     ?>

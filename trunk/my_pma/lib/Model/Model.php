@@ -11,22 +11,24 @@ abstract class Model extends Database {
     /**
      * @var array list of field
      */
-    private $fields = array();
+    protected $fields = array();
     
     /**
      * @var array list of field which are primarykey
      */
-    private $primaryKeys = array();
+    protected $primaryKeys = array();
     
     /**
      * @var string classname
      */
-    private $className;
+    protected $className;
     
     /**
      * @var string table name
      */
-    private $name;
+    protected $name;
+    
+    protected $queryString;
     
     public function __construct($table_name = null)
     {
@@ -54,7 +56,7 @@ abstract class Model extends Database {
      */
     public function getName()
     {
-        return $this->name;
+        return ($this->name);
     }
     
     /**
@@ -65,7 +67,8 @@ abstract class Model extends Database {
      */
     private function setFields()
     {
-        $stmt = self::$con->query("DESCRIBE ".$this->getName());
+        $this->queryString = "DESCRIBE " . $this->getName();
+        $stmt = self::$con->query($this->queryString);
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $field)
         {
             $this->fields[]=$field;
@@ -81,7 +84,7 @@ abstract class Model extends Database {
      */
     public function getFields()
     {
-        return $this->fields;
+        return ($this->fields);
     }
     
     /**
@@ -99,8 +102,9 @@ abstract class Model extends Database {
      *
      * @return array primarykey{n}=fieldName
      */
-    public function getPrimaryKeys(){
-        return $this->primaryKey;
+    public function getPrimaryKeys()
+    {
+        return ($this->primaryKeys);
     }
     
     /**
@@ -114,12 +118,16 @@ abstract class Model extends Database {
         $fields = "";
         $nbFields = count($this->fields);
         $i=0;
-        while($i<$nbFields){
-            $fields .= "`".$this->name."`.`" . $this->fields[$i]['Field'] . "`";
-            if($i != $nbFields-1){ $fields .= ', '; }
+        while($i<$nbFields)
+        {
+            $fields .= "`" . $this->name."`.`" . $this->fields[$i]['Field'] . "`";
+            if($i != $nbFields-1)
+            {
+                $fields .= ', ';
+            }
             $i++;
         }
-        return $fields;
+        return ($fields);
     }
     
     /**
@@ -128,10 +136,11 @@ abstract class Model extends Database {
      * @return string primary key fields
      */
     //TODO extend for multiple primarykeys 
-    private function listPrimaryKeys()
+    private function listPrimaryKeys($id)
     {
-        if(sizeof($this->primaryKeys) === 1){
-            return "`".$this->name."`.`".$this->primaryKeys[0]."` ";
+        if (sizeof($this->primaryKeys) === 1)
+        {
+            return ("`" . $this->name . "`.`" . $this->primaryKeys[0] . "` ");
         }
     }
     
@@ -144,16 +153,34 @@ abstract class Model extends Database {
     //TODO extend for additionnal criteria
     public function read($id)
     {
-        if(!is_array($id)){
-            $sql = 
-            "SELECT ".$this->listFields()
-                ." FROM `".$this->name
-                ."` WHERE ".$this->listPrimaryKeys($id)." = '".$id."'";
+        $this->queryString = "";
+        $this->queryString .= "SELECT " . $this->listFields() .
+        					" FROM `" . $this->name;
+        if (!is_array($id))
+        {
+            $this->queryString .= "` WHERE " . $this->listPrimaryKeys($id) . " = '" . $id . "'";
         }
-        $stmt = self::$con->query($sql);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        else
+        {
+            $this->queryString .= "` WHERE ";
+            $i = 0;
+            foreach($id as $key => $value)
+            {
+                if (in_array($key, $this->primaryKeys))
+                {
+                    $i++;
+                    $this->queryString .= "`" . $key . "`='" . mysql_escape_string($value) . "' AND";
+                }
+            }
+            if ($i > 0)
+            {
+                $this->queryString = substr($this->queryString, 0, -4);
+            }
+        }
+        $stmt = self::$con->query($this->queryString);
+        return ($stmt->fetchAll(PDO::FETCH_ASSOC));
     }
-
+    
     /**
      * @desc read all table
      *
@@ -162,9 +189,10 @@ abstract class Model extends Database {
     //TODO add condition, order & co
     public function readAll()
     {
-    	$sql = "SELECT ".$this->listFields()." FROM `".$this->name."`";
-    	$stmt = Database::$con->query($sql);
-    	return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    	$this->queryString = "SELECT " . $this->listFields() . 
+    							"FROM `" . $this->name. "`";
+    	$stmt = Database::$con->query($this->queryString);
+    	return ($stmt->fetchAll(PDO::FETCH_ASSOC));
     }
     
     /**
@@ -176,25 +204,36 @@ abstract class Model extends Database {
     //TODO extends with validation criteria, return when not valid & cie...
     public function save($data)
     {
-        if(!is_array($data) || empty($data)){ return false; }
-        echo "?";
-        if(!isset($data[$this->name])){ return false; }
-        echo "?";
-        $sqlListField = ""; $sqlListValue = ""; $i=0; $nbFields = count($this->fields);
-        $sql = "INSERT INTO `".$this->name."` (";
+        if (!is_array($data) || empty($data))
+        { 
+            return (false);
+        }
+        if (!isset($data[$this->name]))
+        { 
+           return (false);
+        }
+        $this->queryStringListField = "";
+        $this->queryStringListValue = "";
+        $i = 0;
+        $nbFields = count($this->fields);
+        $this->queryString = "INSERT INTO `".$this->name."` (";
         
-        while($i < $nbFields){
-            if(isset($data[$this->name][$this->fields[$i]['Field']])){
-                $sqlListField .= " `".$this->fields[$i]['Field']."`,";
-                $sqlListValue .= " '".mysql_real_escape_string($data[$this->name][$this->fields[$i]['Field']])."',";
+        while($i < $nbFields)
+        {
+            if (isset($data[$this->name][$this->fields[$i]['Field']]))
+            {
+                $this->queryStringListField .= " `" . $this->fields[$i]['Field'] . "`,";
+                $this->queryStringListValue .= " '" . mysql_real_escape_string($data[$this->name][$this->fields[$i]['Field']]) . "',";
             }
             $i++;
         }
         //delete last coma
-        $sql .= substr($sqlListField,0,strlen($sqlListField)-1).") VALUES(".substr($sqlListValue,0,strlen($sqlListValue)-1).")";
-        $stmt = Database::$con->prepare($sql);
+        $this->queryString .= substr($this->queryStringListField, 0, strlen($this->queryStringListField)-1) .') '. 
+        						'VALUES(' . substr($this->queryStringListValue, 0, strlen($this->queryStringListValue) - 1) . ")";
+        $stmt = Database::$con->prepare($this->queryString);
         $stmt->execute();
-        return array("affectedRow"=>$stmt->rowCount(),"lastInsertId"=>Database::$con->lastInsertId());
+        return (array("affectedRow"=>$stmt->rowCount(),
+        			 "lastInsertId"=>Database::$con->lastInsertId()));
     }
     
     /**
@@ -205,11 +244,24 @@ abstract class Model extends Database {
      */
     public function delete($id)
     {
-        if(empty($id)){ return false; }
-        $sql = "DELETE FROM `".$this->name."` WHERE ".$this->listPrimaryKeys()." = '".$id."'";
-        $stmt = Database::$con->prepare($sql);
+        if (empty($id))
+        {
+            return (false);
+        }
+        $this->queryString = "DELETE FROM `" . $this->name . "` ";
+        $this->queryString .= "WHERE ";
+        if (is_array($id))
+        {
+            foreach($id as $key => $value)
+                $this->queryString .= "`" . $key . "`='" . $value . "' ";
+        }
+        else
+        {
+                $this->queryString .= "`id`='" . $value . "' ";
+        }
+        $stmt = Database::$con->prepare($this->queryString);
         $stmt->execute();
-        return array("affectedRow"=>$stmt->rowCount()); 
+        return (array('affectedRow'=>$stmt->rowCount())); 
     }
     
     /**
@@ -222,23 +274,35 @@ abstract class Model extends Database {
     //TODO add validation criteria
     public function update($id, $data)
     {
-    	if(empty($id)){ return false; }
-    	if(!array($data) || empty($data)){ return false; }
-    	$i=0; $nbFields = count($this->fields);
-        $sql = "UPDATE `".$this->name."` SET";
+    	if (empty($id))
+    	    return (false);
+    	if (!array($data) || empty($data))
+    	    return (false);
+    	$i = 0;
+    	$nbFields = count($this->fields);
+        $this->queryString = "UPDATE `" . $this->name . "` SET";
         while($i < $nbFields)
         {
             if(isset($data[$this->name][$this->fields[$i]['Field']]))
             {
-                $sql .= " `".$this->name."`.`".$this->fields[$i]['Field']."` = '".$data[$this->name][$this->fields[$i]['Field']]."',";
+                $this->queryString .= " `" . $this->name . "`.`" . $this->fields[$i]['Field'] . "` = '" . mysql_escape_string($data[$this->name][$this->fields[$i]['Field']]) . "',";
             }
             $i++;
         }
-        $sql = substr($sql,0,strlen($sql)-1)." WHERE ".$this->listPrimaryKeys()." = '".$id."'";
-    	echo $sql;
-        $stmt = Database::$con->prepare($sql);
+        $this->queryString = substr($this->queryString,0,strlen($this->queryString)-1) . " WHERE ";
+        if (is_array($id))
+        {
+            foreach($id as $key => $value)
+                $this->queryString .= "`" . $key . "`='" . $value . "' ";
+        }
+        else
+        {
+                $this->queryString .= "`id`='" . $value . "' ";
+        }
+        $stmt = Database::$con->prepare($this->queryString);
         $stmt->execute();
-        return array("affectedRow"=>$stmt->rowCount());
+        return (array("affectedRow"=>$stmt->rowCount()));
     }
+    
 }
 ?>
