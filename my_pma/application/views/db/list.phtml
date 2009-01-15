@@ -16,7 +16,17 @@
 		<tr>
 			<td><?php echo $table_name ?></td>
 			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'list', 'params' => array('table_selected' => $table_name)), 'Afficher'); ?></td>
+			<td><?php echo $html->link(array('controller' => 'table',
+											 'action' => 'list',
+											 'params' => array('table_selected' => $table_name)),
+									  'Afficher Ajax',
+			                          array('onclick' => "doRequest('table', 'list', 'table_name', '" . $table_name . "');")); ?></td>
 			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'struct', 'params' => array('table_selected' => $table_name)), 'Structure'); ?></td>
+			<td><?php echo $html->link(array('controller' => 'table',
+											 'action' => 'struct',
+											 'params' => array('table_selected' => $table_name)),
+									  'Structure Ajax',
+			                          array('onclick' => "doRequest('table', 'struct', 'table_name', '". $table_name . "');")); ?></td>
 			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'search', 'params' => array('table_selected' => $table_name)), 'Rechercher'); ?></td>
 			<td><?php echo $html->link(array('controller' => 'row', 'action' => 'create', 'params' => array('table_selected' => $table_name)), 'Inserer'); ?></td>
 			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'export', 'params' => array('table_selected' => $table_name)), 'Exporter'); ?></td>
