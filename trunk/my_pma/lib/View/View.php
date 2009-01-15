@@ -29,11 +29,12 @@ class View
         extract($this->data->get('helpers'), EXTR_SKIP);
         $config = Config::getInstance();
         
-        include_once $config->get('app.absolute_root') . DIRECTORY_SEPARATOR .
+        $file_name = $config->get('app.absolute_root') . DIRECTORY_SEPARATOR .
                      "application" . DIRECTORY_SEPARATOR .
                      "views" . DIRECTORY_SEPARATOR .
                      "layout" . DIRECTORY_SEPARATOR .
                      $this->layout . ".phtml";
+        include_once $file_name;
     }
     
     private function render_action()

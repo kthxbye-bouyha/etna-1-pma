@@ -5,13 +5,17 @@ class FormHelper extends Helper
     
     public function create($url, $model_name = null, $options = array())
     {
+        $out = "";
         $this->model_name = $model_name;
         if (isset($options['validator']))
+        {
+            $out .= '';//'<script type="text/javascript">ValidateForm($("#' . $this->model_name . '"));</script>';
             $this->activeValidator = $options['validator'];
+        }
         else
-            $this->activeValidator = false;
-        return('<form ' .
-        		'action="' . $this->create_url($url) . '"' . 
+            $out .= $this->activeValidator = false;
+        return($out . '<form id="' . $this->model_name . '" ' . 
+        		'action="' . $this->create_url($url) . '" ' . 
                 $this->bind_html_attribute($options) . 
                '>');
     }

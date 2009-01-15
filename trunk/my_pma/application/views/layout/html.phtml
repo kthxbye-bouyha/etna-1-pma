@@ -14,8 +14,9 @@
 		<?php echo $html->js('lib/Effect'); ?>
 		<?php echo $html->js('lib/Element'); ?>
 		<?php echo $html->js('lib/Event'); ?>
+		<?php echo $html->js('lib/Validator'); ?>
         <?php echo $html->js('main'); ?>
-	</head>
+    </head>
 	<body onload="DocumentLoad(event);">
 		<div id="header">
 			<h1>{ETNA - PhpMyAdmin}</h1>
@@ -100,6 +101,11 @@
                                                    'params' => array('db_selected' => $db_selected)),
                 							'Delete') .
                 		'</li>' .
+                        '<li>' . $html->link(array('controller' => 'db',
+                        						   'action' => 'visualization',
+                                                   'params' => array('db_selected' => $db_selected)),
+                							'Visuel') .
+                		'</li>' .
                      '</ul>' .
                      '<hr class="clear"/>';
             }
@@ -111,6 +117,18 @@
             	</p>
             <?php endif; ?>
             <?php echo $action_content; ?>
+            </div>
+            <script type="text/javascript">
+            function doRequest(controller, action, param, value)
+            {
+                request = new Ajax();
+                Ajax.prototype.completeElement = $("#ajax_content");
+                url = "/my_pma/" + controller + "/" + "__ajax_" + action + "?" + param + "=" + value;
+            	request.doRequest("get", url, null);
+            	return (false);
+            }
+            </script>
+            <div id="ajax_content" class="bordered">
 		</div>
 	</body>
 </html>

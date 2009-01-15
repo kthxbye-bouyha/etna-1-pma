@@ -11,6 +11,7 @@ class TableController extends ApplicationController
     {
         
     }
+    
     public function DropAction()
     {
         if (!empty($_GET))
@@ -21,15 +22,31 @@ class TableController extends ApplicationController
         else
             $this->redirect(array('controller' => 'db', 'action' => 'list'));
     }
+    
     public function CreateAction()
     {
         
     }
+    
+    public function __ajax_structAction()
+    {
+        $this->layout = 'ajax';
+        $this->actionName = 'list';
+        $this->StructAction();
+    }
+    
     public function StructAction()
     {
     	$this->viewVars->set('struct_table', $this->model->getFields());
     	$this->viewVars->set('table_name', $this->tableSelected);
     	$this->layoutVars->set('page_title', 'pma/table/struct');
+    }
+    
+    public function __ajax_listAction()
+    {
+        $this->layout = 'ajax';
+        $this->actionName = 'list';
+        $this->ListAction();
     }
     
     public function ListAction()

@@ -28,7 +28,12 @@ abstract class Helper
         if ($options !== null)
         {
             foreach ($options as $key_option => $value_option)
-                $output .= ' ' . $key_option . '="' . $value_option . '"';
+            {
+                if(preg_match("#(submit|select|click)#", $key_option))
+                    $output .= ' ' . $key_option . '="return ' . $value_option . '"';
+                else
+                    $output .= ' ' . $key_option . '="' . $value_option . '"';
+            }
         }
         return ($output);
     }
