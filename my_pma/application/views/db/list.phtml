@@ -6,22 +6,22 @@
 			<th colspan="6">Actions</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tfoot>
+		<tr>
+			<td colspan="8">Ajouter</td>
+		</tr>
+	</tfoot>
+	<tbody class="odd">
 	<?php foreach ($db_tables as $table_name => $table_struct): ?>
 		<tr>
 			<td><?php echo $table_name ?></td>
 			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'list', 'params' => array('table_selected' => $table_name)), 'Afficher'); ?></td>
 			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'struct', 'params' => array('table_selected' => $table_name)), 'Structure'); ?></td>
 			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'search', 'params' => array('table_selected' => $table_name)), 'Rechercher'); ?></td>
-			<td><?php echo $html->link(array('controller' => 'row', 'action' => 'insert', 'params' => array('table_selected' => $table_name)), 'Inserer'); ?></td>
+			<td><?php echo $html->link(array('controller' => 'row', 'action' => 'create', 'params' => array('table_selected' => $table_name)), 'Inserer'); ?></td>
 			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'truncate', 'params' => array('table_selected' => $table_name)), 'Vider'); ?></td>
 			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'drop', 'params' => array('table_selected' => $table_name)), 'Supprimer'); ?></td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>
-	<tfoot>
-		<tr>
-			<td colspan="2">Ajouter</td>
-		</tr>
-	</tfoot>
 </table>
