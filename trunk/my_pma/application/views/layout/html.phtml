@@ -14,55 +14,52 @@
 		<?php echo $html->js('lib/Effect'); ?>
 		<?php echo $html->js('lib/Element'); ?>
 		<?php echo $html->js('lib/Event'); ?>
-        <?php echo $html->js('dbMenu'); ?>
+        <?php echo $html->js('main'); ?>
 	</head>
 	<body onload="DocumentLoad(event);">
-		<div id="main_menu">
-    		<form onchange="menuHandler(event);">
-            	<p><label>BDD :</label> 
-                	<select id ="db_selector">
-            		<?php
-            		foreach ($databases as $database)
-            		{
-            		    $selected = ($db_selected == $database['Database'] ? 'selected="' . $database['Database'] . '"' : null);
-            			echo '<option 
-            					value="' . $database['Database'] . '"' . 
-            					$selected . '>' .
-            			            $database['Database'] .
-            			     	'</option>';
-            		}
-            		?>
-                	</select>
-            	</p>
-            </form>
-        	<!-- BLOCK MENU -->
-            <?php /*if (isset($db_selected)): ?>
-            <ul class="menu_tab">
-            	<li><?php echo $db_selected; ?></li>
-            	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'list'), 'List'); ?></li>
-            	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'visualization'), 'visualisation'); ?></li>
-            	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'export'), 'exporter'); ?></li>
-            	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'import'), 'importer'); ?></li>
-            </ul>
-            <?php endif;*/ ?>
-                        		
+		<div id="main_menu" class="bordered">
+			<h3>Bases</h3>
             <?php
-            if (isset($tables))
-            {
-                echo '<ul class="menu_tab">' . 
-                		'<li>' . $html->link(array('controller' => 'db', 'action' => 'list', 'params' => array('db_selected' => $db_selected)), $db_selected). '</li>' .
-                        '<ul>';
-                foreach ($tables as $table_name => $struct)
-                {
-                    echo '<li>' . $html->link(array('controller' => 'table', 'action' => 'struct', 'params' => array('table_selected' => $table_name)), $table_name) . '</li>';
-                }
-                echo 	'</ul>'.
-                	 '</ul>';
-               
-            }
+            echo '<ul class="menu_tab" id="databases_menu">';
+    		foreach ($databases as $database)
+    		{
+    		    $options = array();
+    		    if ($db_selected == $database['Database'])
+    		    {
+    		        $options['selected'] = "selected";
+    		        echo '<li>' . $html->link(array('controller' => 'db',
+    		        								'action' => 'list',
+    		        								'params' => array('db_selected' => $database['Database'])),
+    		                             substr($database['Database'], 0, 18) . (strlen($database['Database']) > 18 ? '...' : ''),
+    		                             array('title' => 'bdd: ' . $database['Database']));
+                    if (isset($tables))
+                    {
+                        echo '<ul class="menu_tab" id="tables_menu">';
+                        foreach ($tables as $table_name => $struct)
+                        {
+                            echo '<li>' . $html->link(array('controller' => 'table', 
+                            								'action' => 'struct',
+                            								'params' => array('table_selected' => $table_name)),
+                                                     substr($table_name, 0, 18) . (strlen($table_name) > 18 ? '...' : ''),
+                                                     array('title' => 'table: ' . $table_name)) . '</li>';
+                        }
+                        echo '</ul>';
+                    }
+                    echo '</li>';
+    		    }
+    		    else
+    		    {
+    		        echo '<li>' . $html->link(array('controller' => 'db',
+    		        								'action' => 'list',
+    		        								'params' => array('db_selected' => $database['Database'])),
+    		                      $database['Database'],
+    		                      array('title' => 'bdd: ' . $database['Database'])) . '</li>';
+    		    }
+    		}
+    		echo '</ul>';
             ?>
         </div>
-        <div id="content">
+        <div id="content" class="bordered">
         	<?php 
             if (isset($table_selected) && $table_name == $table_selected)
             {

@@ -1,34 +1,70 @@
 @CHARSET "UTF-8";
-body, h1, ul#menu, h2, h3, h4{
-	font-family: Verdana, Arial, sans-serif;
-	margin: 0;	padding: 0;
-	font-size: 0.9em;
+body{
 }
 h1{
 	text-align: center;
 	background-color: #7A7A7A;
 	color: white;
 }
+h2{
+}
+h3{
+}
+h4{
+}
+body, h1, h2, h3, h4{
+	font-family: Verdana, Arial, sans-serif;
+	margin: 0;	padding: 0;
+	font-size: 0.9em;
+}
+div.bordered{
+	margin: 15px;
+	border: 0px solid #5B91BF;
+	border-width: 15px 4px 5px;
+	-moz-border-radius-topleft:15px;
+	-moz-border-radius-topright:15px;
+	-moz-border-radius-bottomright:10px;
+	-moz-border-radius-bottomleft:10px;
+}
 div#main_menu{
 	width: 20%;
 	float: left;
-	margin : 20px 0 0 20px;
 	list-style-type: none;
 }
-ul#menu li{
-	margin-left: 20px;
+div#main_menu h3{
+	color: #5B91BF;
+	text-align: center;
+	padding: 3px 0 0 0;
+	margin: 0;
 }
-ul#menu li.label{
-	margin-left: 0;
-	text-decoration: underline;
+ul.menu_tab{
+	padding : 0 0 0 20px;;
+	margin: 0;
+	list-style-position: inside;
 }
-ul#menu li a:hover{
-	color: white;
-	background-color: gray;
+ul.menu_tab{
+	line-height: 20px;
 }
-ul#menu li a{
-	text-decoration: none;
-	color: black;
+ul.menu_tab li{
+	display: block;
+	text-indent: 20px;
+}
+ul.menu_tab li a{
+	color: blue;
+}
+ul.menu_tab li a:hover{
+	text-decoration: none;		
+}
+
+ul#databases_menu li{
+	background: transparent url('../img/icons/database.png') 2px 3px no-repeat;
+}
+
+ul#tables_menu{
+	font-size: 0.8em;
+}
+ul#tables_menu li{
+	background: transparent url('../img/icons/table.png') 2px 3px no-repeat;
 }
 
 div#breadcrumb{
@@ -41,23 +77,43 @@ h4.error{
 	background-color: red;
 }
 div#content{
-	border-left: 1px solid #7A7A7A;
-	width: 75%;
+	width: 70%;
 	float: left;
-	margin: 20px 0 0 0;
-	padding: 0 0 0 20px;
+	padding: 20px;
+}
+
+table{
 	
 }
-h2{
-	display: inline;
+caption{
+	text-align: left;
+	padding: 10px;
 }
-h3{
-	display: inline;
-}
-h4{
+thead{
 	
 }
 
+tfoot tr td{
+	padding: 10px;
+	text-align: left;
+}
+tbody{
+	
+}
+
+div#content form label{
+	display: block;
+	width: 200px;
+	text-align: right;
+	float: left;
+	margin-right: 3px;
+	background : 
+}
+
+div#content form p{
+	padding: 5px;
+	margin: 0px;
+}
 
 
 div.table_container:hover{

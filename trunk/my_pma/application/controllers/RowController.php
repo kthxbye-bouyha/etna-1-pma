@@ -20,8 +20,8 @@ class RowController extends ApplicationController
         }
         elseif (isset($_POST[$this->tableSelected]['id']))
         {
-            $model->update($_POST[$this->tableSelected]['id'], $_POST[$this->tableSelected]);
-            $this->redirect(array('controller' => 'table', 'action' => 'struct'));
+            $res = $model->update($_POST[$this->tableSelected]['id'], array($this->tableSelected => $_POST[$this->tableSelected]));
+            $this->redirect(array('controller' => 'table', 'action' => 'list'));
         }
         else
             $this->redirect(array('controller' => 'table', 'action' => 'struct'));
@@ -35,15 +35,18 @@ class RowController extends ApplicationController
     public function CreateAction()
     {
     	$model = new ModelAdapter($this->tableSelected);
-        if (isset($_GET['id']))
+        if (empty($_POST))
         {
-            $this->viewVars->set('model', $this->tableSelected);
+            $this->viewVars->set('model_name', $this->tableSelected);
             $this->viewVars->set('struct', $model->getFields());
         }
-        elseif (isset($_POST[$this->tableSelected]['id']))
+        else if (!empty($_POST))
         {
-            $model->save($_POST[$this->tableSelected]);
-            $this->redirect(array('controller' => 'table', 'action' => 'struct'));
+            /*
+            $res = $model->create(array($this->tableSelected => $_POST[$this->tableSelected]));
+            $this->redirect(array('controller' => 'table', 'action' => 'list'));
+            */
+            die("create");
         }
         else
             $this->redirect(array('controller' => 'table', 'action' => 'struct'));

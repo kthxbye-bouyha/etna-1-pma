@@ -9,6 +9,11 @@
 			<td colspan="2">Action</td>
 		</tr>
 	</thead>
+	<tfoot>
+		<tr><td colspan="<?php echo count($struct_table) + 1; ?>">
+		    <?php echo $html->link(array('controller' => 'row', 'action' => 'create', 'params' => array('table_selected' => $table_name)), 'Inserer') ?></td>
+		    </tr>
+	</tfoot>
 	<tbody>
 		<?php foreach ($content_table as $table): ?>
 		<tr>
@@ -20,7 +25,4 @@
 	       </tr>
 		<?php endforeach; ?>
 	</tbody>
-	<tfoot>
-		<tr><td colspan="<?php echo count($struct_table) ?>">Inserer</td></tr>
-	</tfoot>
 </table>
