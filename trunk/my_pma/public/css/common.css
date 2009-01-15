@@ -4,9 +4,6 @@ body{
 	color: rgb(69,128,175);
 }
 h1{
-	text-align: center;
-	background-color: #7A7A7A;
-	color: white;
 }
 h2{
 }
@@ -47,7 +44,25 @@ div.bordered{
 	-moz-border-radius-bottomright:10px;
 	-moz-border-radius-bottomleft:10px;
 }
+div#header h1, div#header p{
+	padding: 0;
+	margin: 0;
+	font-size: 1em;
+	width: 30%;
+	padding: 0 1%;
+	float: left;
+} 
+div#header{
+	background-color: #5B91BF;
+	color: white;
+	height: 18px;
+	text-align: center;
+}
 
+div#header p a:hover{
+	background-color: white;
+	color: #5B91BF;
+}
 div#main_menu{
 	width: 220px;
 	float: left;
@@ -102,6 +117,7 @@ h4.error{
 }
 
 
+
 table{
 	border-collapse: collapse;
 	margin: 20px;
@@ -124,9 +140,7 @@ thead tr, thead tr th, thead tr td{
 	font-family: Arial;
 	font-size: 0.9em;
 }
-tbody tr:hover, tbody tr:hover td{
-	background-color: white;
-}
+
 tbody tr, tbody tr td{
 	background-color: rgb(224,235,243);
 	border: 1px solid white;
@@ -134,13 +148,24 @@ tbody tr, tbody tr td{
 	font-size: 0.9em;
 }
 
+tbody tr.odd_row, tbody tr.odd_row td{
+	background-color: rgb(245,249,252);
+}
+
+
+tbody tr:hover, tbody tr:hover td{
+	background-color: white;
+}
+tbody tr.odd_row:hover, tbody tr.odd_row:hover td{
+	background-color: white;
+}
 tfoot tr td{
 	padding: 5px;
 	text-align: left;
 }
-tbody{
-	background: white;
-}
+
+
+
 div#content form fieldset{
 	border: none;
 }
@@ -170,6 +195,15 @@ div#content form p input:focus,
 div#content form p textarea:focus,
 div#content form p select:focus{
 	background-color: rgb(224,235,243);
+}
+
+div#content form p.submit_btn{
+	text-align: center;
+}
+div#content form p.submit_btn input{
+	background-color: #5B91BF;
+	color: white;
+	font-weight: bold;
 }
 
 ul#menu_context_db{

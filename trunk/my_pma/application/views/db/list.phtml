@@ -1,4 +1,4 @@
-<table>
+<table class="odd">
 	<caption>Table dans la base de donnée <?php echo $db_name ?></caption>
 	<thead>
 		<tr>
@@ -11,7 +11,7 @@
 			<td colspan="8">Ajouter</td>
 		</tr>
 	</tfoot>
-	<tbody class="odd">
+	<tbody>
 	<?php foreach ($db_tables as $table_name => $table_struct): ?>
 		<tr>
 			<td><?php echo $table_name ?></td>
