@@ -18,7 +18,6 @@ $vars = array('db' => array('driver' => 'mysql',
 $config->set('db', $vars['db']);
 $config->set('app', $vars['app']);
 
-
 //call front controller    
 try {
     $front_controller = FrontController::getInstance();
