@@ -1,0 +1,95 @@
+<?php 
+if (isset($db_selected))
+    echo $html->render_element('menu_db', array('db_selected' => $db_selected));
+?>
+<form class="tabled_form" method="POST" action="<?php echo $html->create_url(array('controller' => 'table', 'action' => 'create')) ?>" onsubmit="return validateField(event);">
+	<table>
+    	<caption>Creation d'une table </caption>
+    	<thead>
+        	<tr>
+                <th><label for="champ">Champ</label></th>
+            	<th><label for="type">Type</label></th>
+                <th><label for="taille">Taille</label></th>
+                <th><label for="attributs">Attributs</label></th>
+                <th><label for="is_null">Null</label></th>
+            	<th><label for="default">Default</label></th>
+            	<th><label for="extra">Extra</label></th>
+            	<th><label for="prim">Prim</label></th>
+            	<th><label for="index">Index</label></th>
+            	<th><label for="unique">Unique</label></th>
+            	<th><label for="text">Text</label></th>
+            	<th><label for="comment">Comment</label></th>
+            </tr>
+        </thead>
+        <tfoot>
+        	<tr>
+        		<td colspan="2"><label style="color: black; display: inline; width: auto;">Table</label><input type="text" name="table_name[]" /></td>
+        		<td colspan="1"><input type="button" value="Ajouter un champ" onclick="addField(event);"/></td>
+        		<td colspan="9"><input type="submit" value="envoyer" /></td>
+        	</tr>
+        </tfoot>
+        <tbody>
+        	<tr>
+                <td><input type="text" id="champ" name="field_name[]" /></td>
+            	<td>
+            		<select id="type" name="field_type[]">
+                        <option value="VARCHAR">VARCHAR</option>
+                        <option value="TINYINT">TINYINT</option>
+                        <option value="TEXT">TEXT</option>
+                        <option value="DATE">DATE</option>
+                        <option value="SMALLINT">SMALLINT</option>
+                        <option value="MEDIUMINT">MEDIUMINT</option>
+                        <option value="INT">INT</option>
+                        <option value="BIGINT">BIGINT</option>
+                        <option value="FLOAT">FLOAT</option>
+                        <option value="DOUBLE">DOUBLE</option>
+                        <option value="DECIMAL">DECIMAL</option>
+                        <option value="DATETIME">DATETIME</option>
+                        <option value="TIMESTAMP">TIMESTAMP</option>
+                        <option value="TIME">TIME</option>
+                        <option value="YEAR">YEAR</option>
+                        <option value="CHAR">CHAR</option>
+                        <option value="TINYBLOB">TINYBLOB</option>
+                        <option value="TINYTEXT">TINYTEXT</option>
+                        <option value="BLOB">BLOB</option>
+                        <option value="MEDIUMBLOB">MEDIUMBLOB</option>
+                        <option value="MEDIUMTEXT">MEDIUMTEXT</option>
+                        <option value="LONGBLOB">LONGBLOB</option>
+                        <option value="LONGTEXT">LONGTEXT</option>
+                        <option value="ENUM">ENUM</option>
+                        <option value="SET">SET</option>
+                        <option value="BOOL">BOOL</option>
+                        <option value="BINARY">BINARY</option>
+                        <option value="VARBINARY">VARBINARY</option>
+                    </select>
+            	</td>
+            	<td><input id="taille" type="text" name="field_length[]" /></td>
+            	<td>
+            		<select id="attributs" name="field_attribute[]">
+                        <option selected="selected" value="" />
+                        <option value="UNSIGNED">UNSIGNED</option>
+                        <option value="UNSIGNED ZEROFILL">UNSIGNED ZEROFILL</option>
+                        <option value="ON UPDATE CURRENT_TIMESTAMP">ON UPDATE CURRENT_TIMESTAMP</option>
+                    </select></td>
+            	<td>
+            		<select id="is_null" name="field_null[]">
+                        <option selected="selected" value="NOT NULL">not null</option>
+                        <option value="">null</option>
+                    </select>
+                </td>
+            	<td><input id="default" type="text" name="field_default[]" /></td>
+            	<td>
+            		<select id="extra" name="field_extra[]">
+                        <option value=""> </option>
+                        <option value="AUTO_INCREMENT">auto_increment</option>
+                    </select>
+                </td>
+            	<td><input id="prim" type="radio" value="primary_0" name="field_key[]" /></td>
+            	<td><input id="index" type="radio" value="index_0" name="field_key[]" /></td>
+            	<td><input id="unique" type="radio" value="unique_0" name="field_key[]" /></td>
+            	<td><input id="text" type="checkbox" value="0" name="field_fulltext[]" /></td>
+            	<td><input id="comment" type="text" size="12" name="field_comments[]" /></td>
+            </tr>
+    	</tbody>
+	</table>
+</form>

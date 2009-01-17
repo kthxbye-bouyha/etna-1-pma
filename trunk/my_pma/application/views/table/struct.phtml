@@ -1,5 +1,9 @@
+<?php 
+if (isset($table_selected))
+    echo $html->render_element('menu_table', array('db_selected' => $db_selected, 'table_selected' => $table_selected));
+?>
 <table class="odd">
-	<caption><?php echo $table_name; ?></caption>
+	<caption><?php echo $table_selected; ?></caption>
 	<thead>
 		<tr>
 			<th>Champ</th>

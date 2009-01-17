@@ -67,7 +67,7 @@ abstract class Model extends Database {
      */
     private function setFields()
     {
-        $this->queryString = "DESCRIBE " . $this->getName();
+        $this->queryString = "DESCRIBE `" . self::$dbName . "`.`" .  $this->getName() . "`";
         $stmt = self::$con->query($this->queryString);
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $field)
         {

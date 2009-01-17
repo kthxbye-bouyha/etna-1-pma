@@ -1,5 +1,9 @@
+<?php 
+if (isset($table_selected))
+    echo $html->render_element('menu_table', array('db_selected' => $db_selected, 'table_selected' => $table_selected));
+?>
 <table class="odd">
-	<caption>Affichage de la table <?php echo $table_name; ?></caption>
+	<caption>Affichage de la table <?php echo $table_selected; ?></caption>
 	<thead>
 		<tr>
 		<?php
@@ -11,7 +15,7 @@
 	</thead>
 	<tfoot>
 		<tr><td colspan="<?php echo count($struct_table) + 1; ?>">
-		    <?php echo $html->link(array('controller' => 'row', 'action' => 'create', 'params' => array('table_selected' => $table_name)), 'Inserer') ?></td>
+		    <?php echo $html->link(array('controller' => 'row', 'action' => 'create', 'params' => array('table_selected' => $table_selected)), 'Inserer') ?></td>
 		    </tr>
 	</tfoot>
 	<tbody>

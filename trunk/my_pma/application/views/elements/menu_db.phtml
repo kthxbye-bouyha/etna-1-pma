@@ -1,10 +1,41 @@
-<!-- MENU TABLE -->
-<?php if (isset($db_selected)): ?>
-<ul class="menu_tab">
-	<li><?php echo $db_selected; ?></li>
-	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'list'), 'structure'); ?></li>
-	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'visualization'), 'visualisation'); ?></li>
-	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'export'), 'exporter'); ?></li>
-	<li><?php echo $html->link(array('controller' => 'db', 'action' => 'import'), 'importer'); ?></li>
-</ul>
-<?php endif; ?>
+<!-- MENU DB -->
+<?php 
+echo '<ul id="menu_context_db" class="menu_context">' .
+        '<li class="breadcrumb">db:' . $db_selected . ';</li>' .
+        '<li>' . $html->link(array('controller' => 'db',
+        						   'action' => 'list',
+                                   'params' => array('db_selected' => $db_selected)),
+							'List') . 
+        '<li>' . $html->link(array('controller' => 'db',
+        						   'action' => 'sql',
+                                   'params' => array('db_selected' => $db_selected)),
+							'SQL') . 
+		'</li>' .
+        '<li>' . $html->link(array('controller' => 'db',
+        						   'action' => 'import',
+                                   'params' => array('db_selected' => $db_selected)),
+							'Importer') . 
+		'</li>' .
+        '<li>' . $html->link(array('controller' => 'db',
+        						   'action' => 'export',
+                                   'params' => array('db_selected' => $db_selected)),
+							'Exporter') .
+		'</li>' .
+        '<li>' . $html->link(array('controller' => 'db',
+        						   'action' => 'operation',
+                                   'params' => array('db_selected' => $db_selected)),
+							'Operation') .
+		'</li>' .
+        '<li>' . $html->link(array('controller' => 'db',
+        						   'action' => 'delete',
+                                   'params' => array('db_selected' => $db_selected)),
+							'Delete') .
+		'</li>' .
+        '<li>' . $html->link(array('controller' => 'db',
+        						   'action' => 'visualization',
+                                   'params' => array('db_selected' => $db_selected)),
+							'Visuel') .
+		'</li>' .
+     '</ul>' .
+     '<hr class="clear"/>';
+?>

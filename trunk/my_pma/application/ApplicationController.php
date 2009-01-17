@@ -3,6 +3,7 @@ abstract class ApplicationController extends Controller
 {
     protected $dbSelected;
     protected $tableSelected;
+    protected $model;
     
     protected function init_app_controller()
     {
@@ -20,6 +21,11 @@ abstract class ApplicationController extends Controller
     {
     	$this->setDbSelected();
     	$this->setTableSelected();
+    	
+        $this->layoutVars->set('db_selected', $this->dbSelected);
+        $this->viewVars->set('db_selected', $this->dbSelected);
+        $this->layoutVars->set('table_selected', $this->tableSelected);
+        $this->viewVars->set('table_selected', $this->tableSelected);
     }
     
     private function setDbSelected()
@@ -54,39 +60,20 @@ abstract class ApplicationController extends Controller
 
         $options['db_type'] = $config->get('db.driver');
         if ($this->dbSelected != "")
-        {
             $options['db_name'] = $this->dbSelected;
-            $this->layoutVars->set('db_selected', (isset($options['db_name']) ? $options['db_name'] : null));
-            $this->viewVars->set('db_selected', (isset($options['db_name']) ? $options['db_name'] : null));
-        }
         else
             ;//TODO gerer une exception
         if ($this->tableSelected != "")
-        {
             $options['table_selected'] = $this->tableSelected;
-            $this->layoutVars->set('table_name', ($this->tableSelected != "" ? $this->tableSelected : null));
-            $this->viewVars->set('table_name', ($this->tableSelected != "" ? $this->tableSelected : null));
-        }
         else
             ;//TODO gerer une exception
-        
         DB_Connexion::setConnexion($config->get('db.host'),
                                     $config->get('db.user'),
                                     $config->get('db.pwd'),
                                     $options);
-                                    
-        
         $db = new Database();
-        if ($this->dbSelected != "")
-        {
-            $this->layoutVars->set('databases', $db->getDatabases());
-            $this->layoutVars->set('db_selected', $this->dbSelected);
-        }
-        if ($this->tableSelected != "")
-        {
-            $this->layoutVars->set('table_selected', $this->tableSelected);
-            $this->layoutVars->set('tables', $db->getTables());
-        }
+        $this->layoutVars->set('databases', $db->getDatabases());
+        $this->layoutVars->set('tables', $db->getTables());
     }
     
 }

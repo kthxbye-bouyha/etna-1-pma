@@ -58,20 +58,21 @@ Ajax.prototype.initialize = function()
   }
   return (true);
 }
-
-Ajax.prototype.process = function(httpRequest)
+Ajax.prototype.proccedingElement = null;
+Ajax.prototype.completeElement = null;
+Ajax.prototype.process = function()
 {
-  /*
-  if (this.request.readyState == 4)
+  if (this.readyState == 4)
   {
-    if (this.request.status == 200)
+    if (this.status == 200)
     {
-      this.callback();
+      if (Ajax.prototype.completeElement != null)
+      {
+		  Ajax.prototype.completeElement.style.display = 'block';
+    	  Ajax.prototype.completeElement.innerHTML = this.responseText;
+      }
     }
-    else
-      this.errors.push("problem with request");
   }
-  */
 }
 
 Ajax.prototype.doRequest = function (method, url, params)
@@ -82,4 +83,6 @@ Ajax.prototype.doRequest = function (method, url, params)
     this.request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   
   this.request.send(params);
+  
+  return (false);
 }
