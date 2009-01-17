@@ -12,6 +12,28 @@ class TableController extends ApplicationController
         
     }
     
+    public function AlterfieldAction()
+    {
+    	if (isset($_GET['field_selected']))
+    	{
+    		$this->viewVars->set('field_selected', $_GET['field_selected']);
+	    	$fields = $this->model->getFields();
+	    	$edit = array();
+	    	foreach ($fields as $key => $value)
+	    	{
+	    		if ($value['Field'] == $_GET['field_selected'])
+	    		{
+	    			$edit = $value;
+	    			break;
+	    		}
+	    	}
+	    	$this->model->alter();
+    	}
+    	else
+            $this->redirect(array('controller' => 'db', 'action' => 'list'));
+    		
+    }
+    
     public function DropAction()
     {
         if (!empty($_GET))
@@ -28,25 +50,10 @@ class TableController extends ApplicationController
         
     }
     
-    public function __ajax_structAction()
-    {
-        $this->layout = 'ajax';
-        $this->actionName = 'list';
-        $this->StructAction();
-    }
-    
     public function StructAction()
     {
     	$this->viewVars->set('struct_table', $this->model->getFields());
     	$this->viewVars->set('table_name', $this->tableSelected);
-    	$this->layoutVars->set('page_title', 'pma/table/struct');
-    }
-    
-    public function __ajax_listAction()
-    {
-        $this->layout = 'ajax';
-        $this->actionName = 'list';
-        $this->ListAction();
     }
     
     public function ListAction()
@@ -62,6 +69,7 @@ class TableController extends ApplicationController
         }
     }
     
+    
     public function TruncateAction()
     {
         if (!empty($_GET))
@@ -76,7 +84,7 @@ class TableController extends ApplicationController
     
 	public function ExportAction()
     {
-    	$this->model->dumpTable();
+    	$res = $this->model->dumpTable($this->tableSelected);
     }
     
     public function ImportAction()

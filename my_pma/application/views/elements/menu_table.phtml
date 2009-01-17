@@ -1,9 +1,26 @@
 <!-- MENU TABLE -->
-<?php if (isset($tables)): ?>
-<ul class="menu_tab">
-	<li><?php echo $table_selected; ?></li>
-	<?php foreach ($tables as $table): ?>
-		<?php var_dump($table); ?>
-	<?php endforeach; ?>
-</ul>
-<?php endif; ?>
+<?php
+echo '<ul id="menu_context_table" class="menu_context">' .
+        '<li class="breadcrumb">db:' . $db_selected . ';table:' . $table_selected . ';</li>' .
+        '<li>' . $html->link(array('controller' => 'table',
+											 'action' => 'list',
+											 'params' => array('table_selected' => $table_selected)),
+									  'Afficher',
+			                          array('onclick' => "doRequest('table', 'list', 'table_selected', '" . $table_selected . "');")) . '</li>' .
+        '<li>' . $html->link(array('controller' => 'table',
+											 'action' => 'struct',
+											 'params' => array('table_selected' => $table_selected)),
+									  'Structure',
+			                          array('onclick' => "doRequest('table', 'struct', 'table_selected', '". $table_selected . "');")) . '</li>' .
+        '<li>' .  $html->link(array('controller' => 'table', 'action' => 'search', 'params' => array('table_selected' => $table_selected)), 'Rechercher') . '</li>' .
+        '<li>' . $html->link(array('controller' => 'row',
+			                          		 'action' => 'create',
+			                          		 'params' => array('table_selected' => $table_selected)),
+			                          'Inserer',
+			                          array('onclick' => "doRequest('row', 'create', 'table_selected', '". $table_selected . "');")) . '</li>' .
+        '<li>' . $html->link(array('controller' => 'table', 'action' => 'export', 'params' => array('table_selected' => $table_selected)), 'Exporter') . '</li>' .
+        '<li>' . $html->link(array('controller' => 'table', 'action' => 'truncate', 'params' => array('table_selected' => $table_selected)), 'Vider') . '</li>' .
+        '<li>' . $html->link(array('controller' => 'table', 'action' => 'drop', 'params' => array('table_selected' => $table_selected)), 'Supprimer') . '</li>' .
+     '</ul>' .
+     '<hr class="clear"/>';
+?>

@@ -82,7 +82,7 @@ abstract class Controller
      * @param string $parsed_action
      * @return Controller
      */
-    public function __construct($controller_name, $action_name)
+    public function __construct($controller_name, $action_name, $layout = 'html')
     {
         $this->data = DataView::getInstance();
         $this->viewVars = new Registry();
@@ -90,7 +90,7 @@ abstract class Controller
         
         $this->controllerName = $controller_name;
         $this->actionName = $action_name;
-        $this->layout = 'html';
+        $this->layout = $layout;
     }
     
     public function process()

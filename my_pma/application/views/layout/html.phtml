@@ -16,22 +16,41 @@
 		<?php echo $html->js('lib/Event'); ?>
 		<?php echo $html->js('lib/Validator'); ?>
         <?php echo $html->js('main'); ?>
+        <script type="text/javascript">
+            function doRequest(controller, action, param, value)
+            {
+                request = new Ajax();
+                Ajax.prototype.completeElement = $("#ajax_content");
+                url = "/my_pma/" + controller + "/" + "__ajax_" + action + "?" + param + "=" + value;
+            	request.doRequest("get", url, null);
+            	return (false);
+            }
+            function addField(event)
+        	{
+        		element = event.currentTarget.parentNode.parentNode.parentNode.parentNode.rows[1].cloneNode(true);
+        		event.currentTarget.parentNode.parentNode.parentNode.parentNode.lastChild.previousSibling.appendChild(element);
+        	}
+        	function validateField(event)
+        	{
+        		alert("validateField");
+        		return (true);
+        	}
+		</script>
     </head>
 	<body onload="DocumentLoad(event);">
 		<div id="header">
 			<h1>{ETNA - PhpMyAdmin}</h1>
-			<p class="svn">svn/wiki: <a href="http://code.google.com/p/etna-1-pma/">http://code.google.com/p/etna-1-pma/</span></a>
+			<p class="svn">svn/wiki: <a href="http://code.google.com/p/etna-1-pma/">http://code.google.com/p/etna-1-pma/</a></p>
 			<p class="copyright">authors : fourca_m & borrel_a</p>
-		</h1>
 		</div>
 		<div id="main_menu" class="bordered">
-			<h3>Bases</h3>
+			<h3 class="breadcrumb">databases</h3>
             <?php
             echo '<ul class="menu_tab" id="databases_menu">';
     		foreach ($databases as $database)
     		{
     		    $options = array();
-    		    if ($db_selected == $database['Database'])
+    		    if (isset($db_selected) && $db_selected == $database['Database'])
     		    {
     		        $options['selected'] = "selected";
     		        echo '<li>' . $html->link(array('controller' => 'db',
@@ -67,67 +86,9 @@
             ?>
         </div>
         <div id="content" class="bordered">
-        	<?php 
-            if (isset($db_selected))
-            {
-                echo '<ul id="menu_context_db">' .
-                        '<li class="label">db: ' . $db_selected . '</li>' .
-                        '<li>' . $html->link(array('controller' => 'db',
-                        						   'action' => 'list',
-                                                   'params' => array('db_selected' => $db_selected)),
-                							'List') . 
-                        '<li>' . $html->link(array('controller' => 'db',
-                        						   'action' => 'sql',
-                                                   'params' => array('db_selected' => $db_selected)),
-                							'SQL') . 
-                		'</li>' .
-                        '<li>' . $html->link(array('controller' => 'db',
-                        						   'action' => 'import',
-                                                   'params' => array('db_selected' => $db_selected)),
-                							'Importer') . 
-                		'</li>' .
-                        '<li>' . $html->link(array('controller' => 'db',
-                        						   'action' => 'export',
-                                                   'params' => array('db_selected' => $db_selected)),
-                							'Exporter') .
-                		'</li>' .
-                        '<li>' . $html->link(array('controller' => 'db',
-                        						   'action' => 'operation',
-                                                   'params' => array('db_selected' => $db_selected)),
-                							'Operation') .
-                		'</li>' .
-                        '<li>' . $html->link(array('controller' => 'db',
-                        						   'action' => 'delete',
-                                                   'params' => array('db_selected' => $db_selected)),
-                							'Delete') .
-                		'</li>' .
-                        '<li>' . $html->link(array('controller' => 'db',
-                        						   'action' => 'visualization',
-                                                   'params' => array('db_selected' => $db_selected)),
-                							'Visuel') .
-                		'</li>' .
-                     '</ul>' .
-                     '<hr class="clear"/>';
-            }
-            ?>
-            <?php if (isset($queryString)): ?>
-            	<p id="query_string">
-            		<strong>SQL :</strong><br />
-            		<?php echo $queryString; ?>
-            	</p>
-            <?php endif; ?>
-            <?php echo $action_content; ?>
-            </div>
-            <script type="text/javascript">
-            function doRequest(controller, action, param, value)
-            {
-                request = new Ajax();
-                Ajax.prototype.completeElement = $("#ajax_content");
-                url = "/my_pma/" + controller + "/" + "__ajax_" + action + "?" + param + "=" + value;
-            	request.doRequest("get", url, null);
-            	return (false);
-            }
-            </script>
+        	<?php echo $action_content; ?>
+        </div>
+           
             <div id="ajax_content" class="bordered">
 		</div>
 	</body>

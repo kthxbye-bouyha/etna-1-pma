@@ -13,7 +13,7 @@ abstract class Helper
         $this->action = $config->get('rendering.action');
     }
     
-    protected function create_url($url)
+    public function create_url($url)
     {
         $output = '';
         $output .= '/' . (!isset($url['root']) ? $this->root : $url['root']);

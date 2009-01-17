@@ -21,7 +21,9 @@ class FrontController
      * @var string
      */
     private $actionName;
-     
+    
+    private $layoutRequested = 'html';
+    
     public function __construct()
     {
     }
@@ -129,6 +131,12 @@ class FrontController
      */
     private function setActionName($parsed_action = "")
     {
+        $match = array();
+        if (preg_match("#__([[:alpha:]]+)_(.*)#", $parsed_action, $match))
+        {
+            $this->layoutRequested = $match[1];
+            $parsed_action = $match[2];
+        }
         $methods_controller = get_class_methods($this->controllerName . 'Controller');
         $method_name = ucfirst(strtolower($parsed_action));
         
@@ -152,8 +160,8 @@ class FrontController
         $config->set('rendering.controller', $this->controllerName);
         $config->set('rendering.action', $this->actionName);
         
-        $controller_class_name = $this->controllerName . 'Controller'; 
-        $controller = new $controller_class_name($this->controllerName, $this->actionName);
+        $controller_class_name = $this->controllerName . 'Controller';
+        $controller = new $controller_class_name($this->controllerName, $this->actionName, $this->layoutRequested);
         $controller->process();
     }
     

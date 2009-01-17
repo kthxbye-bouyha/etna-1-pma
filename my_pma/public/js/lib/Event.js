@@ -7,8 +7,7 @@ function DocumentLoad(fct)
   {
     for (i = 0; i < stack.length; i++)
     {
-      stack[i]();
-      stack.pop();
+      stack[i](fct);
     }
   }
 }
