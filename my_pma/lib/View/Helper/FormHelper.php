@@ -121,6 +121,18 @@ class FormHelper extends Helper
         return ($out .= '</fieldset>' . $this->end());
     }
     
+    public function getJSPrimaryKeys($struct_table, $item)
+    {
+        $primary_keys = "";
+        foreach($struct_table as $field => $value)
+        {
+            if (preg_match("#PRI#", $value['Key']))
+            {
+                $primary_keys .= $value['Field'] . ':\'' .$item[$value['Field']] . '\',';
+            }
+        }
+        return (rtrim($primary_keys, ","));
+    }
     public function getPrimaryKeys($struct_table, $item)
     {
         $primary_keys = array();

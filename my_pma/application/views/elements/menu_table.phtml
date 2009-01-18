@@ -6,18 +6,18 @@ echo '<ul id="menu_context_table" class="menu_context">' .
 											 'action' => 'list',
 											 'params' => array('table_selected' => $table_selected)),
 									  'Afficher',
-			                          array('onclick' => "doRequest('table', 'list', 'table_selected', '" . $table_selected . "');")) . '</li>' .
+			                          array('onclick' => "doRequest({controller:'table', action:'list', complete:'#table_content', table_selected:'". $table_selected . "'});")) . '</li>' .
         '<li>' . $html->link(array('controller' => 'table',
 											 'action' => 'struct',
 											 'params' => array('table_selected' => $table_selected)),
 									  'Structure',
-			                          array('onclick' => "doRequest('table', 'struct', 'table_selected', '". $table_selected . "');")) . '</li>' .
+			                          array('onclick' => "doRequest({controller:'table', action:'struct', complete:'#table_content', table_selected:'". $table_selected . "'});")) . '</li>' .
         '<li>' .  $html->link(array('controller' => 'table', 'action' => 'search', 'params' => array('table_selected' => $table_selected)), 'Rechercher') . '</li>' .
         '<li>' . $html->link(array('controller' => 'row',
 			                          		 'action' => 'create',
 			                          		 'params' => array('table_selected' => $table_selected)),
 			                          'Inserer',
-			                          array('onclick' => "doRequest('row', 'create', 'table_selected', '". $table_selected . "');")) . '</li>' .
+			                          array('onclick' => "doRequest({controller:'row', action:'create', complete:'#row_content', table_selected:'". $table_selected . "'});")) . '</li>' .
         '<li>' . $html->link(array('controller' => 'table', 'action' => 'export', 'params' => array('table_selected' => $table_selected)), 'Exporter') . '</li>' .
         '<li>' . $html->link(array('controller' => 'table', 'action' => 'truncate', 'params' => array('table_selected' => $table_selected)), 'Vider') . '</li>' .
         '<li>' . $html->link(array('controller' => 'table', 'action' => 'drop', 'params' => array('table_selected' => $table_selected)), 'Supprimer') . '</li>' .

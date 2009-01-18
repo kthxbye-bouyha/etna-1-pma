@@ -66,11 +66,12 @@ Ajax.prototype.process = function()
   {
     if (this.status == 200)
     {
-      if (Ajax.prototype.completeElement != null)
-      {
-		  Ajax.prototype.completeElement.style.display = 'block';
-    	  Ajax.prototype.completeElement.innerHTML = this.responseText;
-      }
+    	elem = createElement("tmp");
+    	elem.innerHTML = this.responseText;
+    	Ajax.prototype.completeElement.innerHTML = elem.firstChild.innerHTML;
+    	if (Ajax.prototype.completeElement.style.display == 'none')
+    		Ajax.prototype.completeElement.style.display = 'block';
+    	odd();
     }
   }
 }
