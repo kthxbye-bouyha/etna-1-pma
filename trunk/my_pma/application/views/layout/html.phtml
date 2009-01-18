@@ -17,14 +17,34 @@
 		<?php echo $html->js('lib/Validator'); ?>
         <?php echo $html->js('main'); ?>
         <script type="text/javascript">
-            function doRequest(controller, action, param, value)
-            {
+        	function doRequest(argv)
+        	{
                 request = new Ajax();
-                Ajax.prototype.completeElement = $("#ajax_content");
-                url = "/my_pma/" + controller + "/" + "__ajax_" + action + "?" + param + "=" + value;
+            	action = "";
+            	controller = "";
+            	key_value_vars = "";
+            	for (param in argv)
+            	{
+                	if (param == 'controller')
+                		controller = argv.controller;
+                	else if (param == 'action')
+                		action = argv.action;
+                	else if (param == 'complete')
+                	{
+                		if ($(argv.complete) == null)
+                			Ajax.prototype.completeElement = null;
+                		else
+                        	Ajax.prototype.completeElement = $(argv.complete);
+                	}
+                	else
+                		key_value_vars = key_value_vars + "" + param + "=" + argv[param] + "&";
+            	}
+                url = "/" + relative_root + "/" + controller + "/" + "__ajax_" + action + "?" + key_value_vars;
+                while (url.charAt(url.length- 1) == "?" || url.charAt(url.length - 1) == "&")
+            		url = url.substring(0, (url.length - 1));
             	request.doRequest("get", url, null);
             	return (false);
-            }
+        	}
             function addField(event)
         	{
         		element = event.currentTarget.parentNode.parentNode.parentNode.parentNode.rows[1].cloneNode(true);
@@ -85,11 +105,6 @@
     		echo '</ul>';
             ?>
         </div>
-        <div id="content" class="bordered">
-        	<?php echo $action_content; ?>
-        </div>
-           
-            <div id="ajax_content" class="bordered">
-		</div>
+    	<?php echo $action_content; ?>
 	</body>
 </html>

@@ -1,3 +1,4 @@
+<div id="table_content" class="bordered">
 <?php 
 if (isset($table_selected))
     echo $html->render_element('menu_table', array('db_selected' => $db_selected, 'table_selected' => $table_selected));
@@ -14,8 +15,12 @@ if (isset($table_selected))
 		</tr>
 	</thead>
 	<tfoot>
-		<tr><td colspan="<?php echo count($struct_table) + 1; ?>">
-		    <?php echo $html->link(array('controller' => 'row', 'action' => 'create', 'params' => array('table_selected' => $table_selected)), 'Inserer') ?></td>
+		<tr><td colspan="<?php echo count($struct_table) + 2; ?>">
+		    <?php echo $html->link(array('controller' => 'row',
+		    							 'action' => 'create',
+		    							 'params' => array('table_selected' => $table_selected)),
+		    				  'Inserer',
+		                      array('onclick' => "doRequest({controller:'row', action:'create', complete:'#row_content', table_selected:'" . $table_selected . "'});")) ?></td>
 		    </tr>
 	</tfoot>
 	<tbody>
@@ -24,9 +29,14 @@ if (isset($table_selected))
 		    <?php foreach($table as $content): ?>
     	    <td><?php echo $content; ?></td>
     	    <?php endforeach;?>
-    	    <td><?php echo  $html->link(array('controller' => 'row', 'action' => 'update', 'params' => $form->getPrimaryKeys($struct_table, $table)), 'Editer'); ?></td>
+    	    <td><?php echo  $html->link(array('controller' => 'row',
+    	    								  'action' => 'update',
+    	    								  'params' => $form->getPrimaryKeys($struct_table, $table)),
+    	    					       'Editer',
+    	                               array('onclick' => "doRequest({controller:'row', action:'update', complete:'#row_content', " . $form->getJSPrimaryKeys($struct_table, $table) . "});")) ?></td>
     	    <td><?php echo $html->link(array('controller' => 'row', 'action' => 'delete', 'params' => $form->getPrimaryKeys($struct_table, $table)), 'Supprimer'); ?></td>
 	       </tr>
 		<?php endforeach; ?>
 	</tbody>
 </table>
+</div>

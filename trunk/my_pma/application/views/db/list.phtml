@@ -1,4 +1,5 @@
-<?php 
+<div id="db_content" class="bordered">
+<?php
 if (isset($db_selected))
     echo $html->render_element('menu_db', array('db_selected' => $db_selected));
 ?>
@@ -16,7 +17,7 @@ if (isset($db_selected))
 														 'action' => 'create',
 													     'params' => array('db_selected' => $db_selected)),
 												   'Creer une table',
-			                                       array('onclick' => "doRequest('table', 'create', 'db_selected', '" . $db_selected . "');")); ?></td>
+			                                       array('onclick' => "doRequest({controller:'table', action:'create', complete:'#db_content', db_selected:'". $db_selected . "'});")); ?></td>
 		</tr>
 	</tfoot>
 	<tbody>
@@ -25,24 +26,25 @@ if (isset($db_selected))
 			<td><?php echo $table_name ?></td>
 			<td><?php echo $html->link(array('controller' => 'table',
 											 'action' => 'list',
-											 'params' => array('table_selected' => $table_selected)),
+											 'params' => array('table_selected' => $table_name)),
 									  'Afficher',
-			                          array('onclick' => "doRequest('table', 'list', 'table_selected', '" . $table_selected . "');")); ?></td>
+			                          array('onclick' => "doRequest({controller:'table', action:'list', complete:'#table_content', table_selected:'". $table_name . "'});")); ?></td>
 			<td><?php echo $html->link(array('controller' => 'table',
 											 'action' => 'struct',
-											 'params' => array('table_selected' => $table_selected)),
+											 'params' => array('table_selected' => $table_name)),
 									  'Structure',
-			                          array('onclick' => "doRequest('table', 'struct', 'table_selected', '". $table_selected . "');")); ?></td>
-			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'search', 'params' => array('table_selected' => $table_selected)), 'Rechercher'); ?></td>
+			                          array('onclick' => "doRequest({controller:'table', action:'struct', complete:'#table_content', table_selected:'". $table_name . "'});")); ?></td>
+			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'search', 'params' => array('table_selected' => $table_name)), 'Rechercher'); ?></td>
 			<td><?php echo $html->link(array('controller' => 'row',
 			                          		 'action' => 'create',
-			                          		 'params' => array('table_selected' => $table_selected)),
+			                          		 'params' => array('table_selected' => $table_name)),
 			                          'Inserer',
-			                          array('onclick' => "doRequest('row', 'create', 'table_selected', '". $table_selected . "');")); ?></td>
-			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'export', 'params' => array('table_selected' => $table_selected)), 'Exporter'); ?></td>
-			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'truncate', 'params' => array('table_selected' => $table_selected)), 'Vider'); ?></td>
-			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'drop', 'params' => array('table_selected' => $table_selected)), 'Supprimer'); ?></td>
+			                          array('onclick' => "doRequest({controller:'row', action:'create', complete:'#row_content', table_selected:'". $table_name . "'});")); ?></td>
+			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'export', 'params' => array('table_selected' => $table_name)), 'Exporter'); ?></td>
+			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'truncate', 'params' => array('table_selected' => $table_name)), 'Vider'); ?></td>
+			<td><?php echo $html->link(array('controller' => 'table', 'action' => 'drop', 'params' => array('table_selected' => $table_name)), 'Supprimer'); ?></td>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>
 </table>
+</div>

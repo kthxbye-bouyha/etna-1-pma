@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+/******GLOBAL******/
 body{
 	font-size: 0.8em;
 	color: rgb(69,128,175);
@@ -12,29 +13,23 @@ h3{
 h4{
 }
 
+/******LINK******/
+a, a:link, :visited{ color: blue; }
+a:active{ color: purple; }
+a:hover{ text-decoration: none; }
 
-a, a:link, :visited{
-	color: blue;
-}
-a:active{
-	color: purple;
-}
-a:hover{
-	text-decoration: none;		
-}
-
+/******OTHERS******/
 hr.clear{
 	border: none;
 	margin: 0;
 	padding: 0;
-	clear: both;
 }
-
 body, h1, h2, h3, h4{
 	font-family: Verdana, Arial, sans-serif;
 	margin: 0;	padding: 0;
 }
 
+/******STRUCT******/
 div.bordered{
 	margin: 7px;
 	border: 0px solid #5B91BF;
@@ -44,6 +39,18 @@ div.bordered{
 	-moz-border-radius-bottomright:10px;
 	-moz-border-radius-bottomleft:10px;
 }
+div#db_content, div#table_content, div#row_content{ margin-left:220px; }
+h4.success{ background-color: green; }
+h4.error{ background-color: red; }
+.breadcrumb{
+	background-color: #5B91BF;
+	color: white;
+	padding: 1px 10px;
+	font-size:1em;
+	font-weight: bold;
+}
+
+/******HEADER******/
 div#header h1, div#header p{
 	padding: 0;
 	margin: 0;
@@ -58,51 +65,21 @@ div#header{
 	height: 18px;
 	text-align: center;
 }
-
 div#header p a:hover{
 	background-color: white;
 	color: #5B91BF;
 }
+
+/******MENU******/
 div#main_menu{
+	width: 190px;
 	float: left;
 	list-style-type: none;
-}
-div#content, div#ajax_content{
-	float: left;
-	max-width: 65%;
-	min-width: 40%;
-}
-
-div#ajax_content{
-	display: none;
-}
-
-
-.breadcrumb{
-	background-color: #5B91BF;
-	color: white;
-	padding: 1px 10px;
-	font-size:1em;
-	font-weight: bold;
-}
-
-
-ul.menu_tab{
-	padding : 10px 20px;
-	margin: 0;
-	list-style-position: inside;
-}
-ul.menu_tab{
-	line-height: 20px;
-}
-ul.menu_tab li{
-	display: block;
 }
 ul#databases_menu li{
 	background: transparent url('../img/icons/database.png') 0px 3px no-repeat;
 	text-indent: 16px;
 }
-
 ul#tables_menu{
 	font-size: 0.8em;
 	padding : 0 20px;;
@@ -111,20 +88,35 @@ ul#tables_menu li{
 	background: transparent url('../img/icons/table.png') -1px 3px no-repeat;
 	text-indent: 17px;
 }
-
-div#breadcrumb{
+ul.menu_context{
+	list-style-type: none;
+	list-style-position: inline;
+	margin: 0 0 20px 0;
+	padding: 0;
 }
-
-
-h4.success{
-	background-color: green;
+ul.menu_context li.label{
+	background-color: #5B91BF;
+	font-weight: bold;
+	color: white;
+	
 }
-h4.error{
-	background-color: red;
+ul.menu_context li{
+	display: block;
+	float: left;
+	padding: 1px 10px;
+	border-right: 1px solid #5B91BF;
+	border-bottom: 1px solid #5B91BF;
+	border-left:  1px solid #5B91BF;
 }
+ul.menu_tab{
+	padding : 10px 20px;
+	margin: 0;
+	list-style-position: inside;
+}
+ul.menu_tab{ line-height: 20px; }
+ul.menu_tab li{ display: block; }
 
-
-
+/******TABLE******/
 table{
 	border-collapse: collapse;
 	margin: 20px;
@@ -147,36 +139,36 @@ thead tr, thead tr th, thead tr td{
 	font-family: Arial;
 	font-size: 0.9em;
 }
-
 tbody tr, tbody tr td{
 	background-color: rgb(224,235,243);
 	border: 1px solid white;
 	padding: 2px 5px;
 	font-size: 0.9em;
 }
-
-tbody tr.odd_row, tbody tr.odd_row td{
+tbody tr.odd_row,
+tbody tr.odd_row td{
 	background-color: rgb(245,249,252);
 }
-
-
-tbody tr:hover, tbody tr:hover td{
+tbody tr:hover,
+tbody tr:hover td{
 	background-color: white;
 }
-tbody tr.odd_row:hover, tbody tr.odd_row:hover td{
+tbody tr.odd_row:hover,
+tbody tr.odd_row:hover td{
 	background-color: white;
 }
 tfoot tr td{
 	padding: 5px;
-	text-align: left;
+	text-align: right;
 }
 
-div#content form.tabled_form table thead tr th label,
-div#content form.tabled_form table thead tr td label, 
-div#content form.tabled_form table tbody tr td label, 
-div#content form.tabled_form table tbody tr td label,
-div#content form.tabled_form table tfoot tr td label,
-div#content form.tabled_form table tfoot tr td label
+/******FORM******/
+form.tabled_form table thead tr th label,
+form.tabled_form table thead tr td label, 
+form.tabled_form table tbody tr td label, 
+form.tabled_form table tbody tr td label,
+form.tabled_form table tfoot tr td label,
+form.tabled_form table tfoot tr td label
 {
 	display: block; 
 	width: 100%;
@@ -185,16 +177,9 @@ div#content form.tabled_form table tfoot tr td label
 	color: white;
 	text-align: center;
 }
-
-
-
-div#content form fieldset{
-	border: none;
-}
-div#content form fieldset legend{
-	
-}
-div#content form label{
+form fieldset{ border: none; }
+form fieldset legend{ }
+form label{
 	display: block;
 	width: 200px;
 	text-align: right;
@@ -203,76 +188,29 @@ div#content form label{
 	color: rgb(69,128,175);
 	line-height: 1.5em;
 }
-
-div#content form p{
+form p{
 	padding: 5px;
 	margin: 0px;
 }
-div#content form p input,
-div#content form p textarea,
-div#content form p select{
+form p input,
+form p textarea,
+form p select{
 	border: 1px solid #5B91BF;
 }
-div#content form p input:focus,
-div#content form p textarea:focus,
-div#content form p select:focus{
+form p input:focus,
+form p textarea:focus,
+form p select:focus{
 	background-color: rgb(224,235,243);
 }
-
-div#content form p.submit_btn{
-	text-align: center;
-}
-div#content form p.submit_btn input{
+form p.submit_btn{ text-align: center; }
+form p.submit_btn input{
 	background-color: #5B91BF;
 	color: white;
 	font-weight: bold;
 }
 
-
-
-
-ul.menu_context{
-	list-style-type: none;
-	list-style-position: inline;
-	margin: 0 0 20px 0;
-	padding: 0;
-}
-ul.menu_context li.label{
-	background-color: #5B91BF;
-	font-weight: bold;
-	color: white;
-	
-}
-ul.menu_context li{
-	display: block;
-	float: left;
-	padding: 1px 10px;
-	border-right: 1px solid #5B91BF;
-	border-bottom: 1px solid #5B91BF;
-	border-left:  1px solid #5B91BF;
-}
-
-p#query_string{
-	background-color: rgb(241, 247, 250);
-	border: 1px dashed #5B91BF;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-div.table_container:hover{
-	cursor: move;
-}
+/******VISU******/
+div.table_container:hover{ cursor: move; }
 div.table_container{
 	-moz-border-radius-topleft: 10px;
 	-moz-border-radius-topright: 10px;
@@ -302,10 +240,5 @@ div.table_container ul{
 	margin:0;
 	padding:0 5px;
 }
-
-ul li.primary_key{
-	font-weight: bold;
-}
-ul li.foreign_key{
-	font-style: italic;
-}
+ul li.primary_key{ font-weight: bold; }
+ul li.foreign_key{ font-style: italic; }
